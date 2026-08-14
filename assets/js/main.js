@@ -4,7 +4,7 @@
   'use strict';
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var TABS = ['about', 'timeline', 'publications', 'honors', 'service', 'contact'];
+  var TABS = ['about', 'timeline', 'publications', 'honors', 'service'];
 
   /* ---- mobile nav toggle ---- */
   var toggle = document.getElementById('navToggle');
