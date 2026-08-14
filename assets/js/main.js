@@ -143,36 +143,42 @@
   }
 
   /* ---- realistic celestial motion: sun & moon orbit the Earth (space view).
-         Moon phase follows the sun direction; sun fades at the planet's limb. ---- */
+         Both rise left (east) and set right (west). Moon phase is computed from the
+         sun-moon-earth angle (offset shadow circle: new moon .. full moon). ---- */
   (function () {
     var sun = document.querySelector('.bg-sun');
     var moon = document.querySelector('.moon-pos');
-    var moonPhase = document.querySelector('.moon-phase');
+    var moonShadow = document.querySelector('.moon-shadow');
     if (!sun || !moon || typeof performance === 'undefined') return;
     var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
-    var EARTH = { x: 50, y: 104, r: 33 };     // earth center & disk radius (vh-ish)
-    var SUN = { rx: 48, ry: 34, cx: 50, cy: 72, dur: 85000 };  // elliptical arc across the sky
-    var MOON = { r: 46, dur: 50000 };          // circular orbit around the earth
+    var norm = function (a) { while (a > Math.PI) a -= 2 * Math.PI; while (a < -Math.PI) a += 2 * Math.PI; return a; };
+    var EARTH = { x: 50, y: 104, r: 33 };      // earth center & disk radius
+    var SUN = { rx: 48, ry: 34, cx: 50, cy: 72, dur: 85000 };  // elliptical arc, left -> right
+    var MOON = { r: 46, dur: 50000 };           // circular orbit, left -> right
+    var MOON_PX = 32;                           // half of the 64px moon
     var place = function () {
       var t = performance.now();
-      // sun: elliptical arc, rises left (east) -> zenith -> sets right (west), lower half behind Earth
+      // sun: elliptical arc across the sky
       var sp = (t % SUN.dur) / SUN.dur * 2 * Math.PI;
       var sx = SUN.cx - SUN.rx * Math.cos(sp);
       var sy = SUN.cy - SUN.ry * Math.sin(sp);
-      // fade sun near the limb
       var d = Math.sqrt((sx - EARTH.x) * (sx - EARTH.x) + (sy - EARTH.y) * (sy - EARTH.y));
       var op = clamp((d - (EARTH.r - 6)) / 8, 0, 1);
       sun.style.transform = 'translate(' + sx + 'vw,' + sy + 'vh) translate(-50%,-50%)';
       sun.style.opacity = op.toFixed(2);
-      // moon: circular orbit around the earth
+      // moon: circular orbit, same left->right direction as the sun
       var mp = (t % MOON.dur) / MOON.dur * 2 * Math.PI;
-      var mx = EARTH.x + MOON.r * Math.cos(mp);
+      var mx = EARTH.x - MOON.r * Math.cos(mp);
       var my = EARTH.y - MOON.r * Math.sin(mp);
       moon.style.transform = 'translate(' + mx + 'vw,' + my + 'vh) translate(-50%,-50%)';
-      // moon phase: lit side faces the sun
-      if (moonPhase) {
-        var ang = Math.atan2(sy - my, sx - mx) * 180 / Math.PI;
-        moonPhase.style.transform = 'rotate(' + (((ang + 180) % 360) + 360) % 360 + 'deg)';
+      // moon phase: illuminated fraction from sun-moon-earth angle
+      if (moonShadow) {
+        var sunAng = Math.atan2(sy - EARTH.y, sx - EARTH.x);
+        var moonAng = Math.atan2(my - EARTH.y, mx - EARTH.x);
+        var theta = norm(moonAng - sunAng);       // 0 = new moon, PI = full moon
+        var off = MOON_PX * Math.cos(theta);      // shadow offset (px)
+        var rot = Math.atan2(my - sy, mx - sx) * 180 / Math.PI;  // shadow pushed away from sun
+        moonShadow.style.transform = 'rotate(' + rot.toFixed(1) + 'deg) translateX(' + off.toFixed(1) + 'px)';
       }
     };
     if (reduceMotion) { place(); return; }

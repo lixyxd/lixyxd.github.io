@@ -76,11 +76,24 @@ em{font-style:normal;}
   animation:rays-rotate 46s linear infinite;}
 @keyframes rays-rotate{to{transform:rotate(360deg);}}
 .sun{position:absolute; inset:0; border-radius:50%;
-  background:radial-gradient(circle at 50% 50%, #fffbe8 0%, #ffe9a8 24%, #ffc46a 46%, #ff9e3d 62%, rgba(255,150,50,.35) 78%, rgba(255,150,50,0) 100%);}
-.sun-halo{position:absolute; inset:-60px; border-radius:50%;
-  background:radial-gradient(circle, rgba(255,190,100,.5) 0%, rgba(255,150,60,.16) 48%, transparent 72%);
+  background:radial-gradient(circle at 42% 42%, #fffdf0 0%, #fff3c4 26%, #ffd98f 48%, #ffb35c 66%, #ff8f3d 80%, rgba(255,120,40,.25) 92%, rgba(255,120,40,0) 100%);}
+.sun-surface{position:absolute; inset:-16%; border-radius:50%;
+  background:
+    radial-gradient(30% 26% at 30% 40%, rgba(255,205,125,.5), transparent 65%),
+    radial-gradient(24% 20% at 62% 32%, rgba(255,185,95,.45), transparent 65%),
+    radial-gradient(20% 18% at 45% 62%, rgba(255,215,135,.4), transparent 65%),
+    radial-gradient(16% 14% at 72% 55%, rgba(255,165,75,.38), transparent 65%),
+    radial-gradient(14% 12% at 25% 65%, rgba(255,195,105,.35), transparent 65%),
+    radial-gradient(12% 10% at 80% 75%, rgba(255,175,85,.3), transparent 65%);
+  animation:sun-boil 16s ease-in-out infinite alternate;}
+@keyframes sun-boil{from{transform:scale(1) rotate(0deg);} to{transform:scale(1.09) rotate(7deg);}}
+.sun-halo{position:absolute; inset:-64px; border-radius:50%;
+  background:
+    radial-gradient(circle, rgba(255,200,110,.5) 0%, rgba(255,160,70,.22) 40%, rgba(255,140,50,.08) 62%, transparent 74%);
   animation:sun-pulse 6s ease-in-out infinite;}
-@keyframes sun-pulse{0%,100%{opacity:.65;} 50%{opacity:1;}}
+.sun-halo::after{content:""; position:absolute; inset:6%; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,220,150,.35), transparent 60%);}
+@keyframes sun-pulse{0%,100%{opacity:.7;} 50%{opacity:1;}}
 
 /* moon: orbits the Earth (position + phase driven by JS); realistic maria + shading */
 .moon-pos{position:absolute; left:0; top:0; width:64px; height:64px; z-index:0; pointer-events:none;}
@@ -97,8 +110,17 @@ em{font-style:normal;}
     radial-gradient(9% 8% at 26% 66%, rgba(122,116,96,.2), transparent 70%);}
 .moon::after{content:""; position:absolute; inset:0; border-radius:50%;
   box-shadow:inset -9px -7px 18px rgba(0,0,0,.38), inset 5px 5px 12px rgba(255,255,255,.2);}
-.moon-phase{position:absolute; inset:-60%; border-radius:50%;
-  background:linear-gradient(90deg, rgba(4,10,24,.96) 0 50%, rgba(4,10,24,0) 50%);}
+.moon-maria{position:absolute; inset:0; border-radius:50%;
+  background:
+    radial-gradient(24% 20% at 34% 44%, rgba(122,116,96,.4), transparent 70%),
+    radial-gradient(18% 15% at 58% 36%, rgba(122,116,96,.32), transparent 70%),
+    radial-gradient(15% 13% at 47% 63%, rgba(122,116,96,.28), transparent 70%),
+    radial-gradient(11% 10% at 71% 56%, rgba(122,116,96,.24), transparent 70%),
+    radial-gradient(9% 8% at 26% 66%, rgba(122,116,96,.2), transparent 70%);}
+/* phase: a shadow circle offset toward the anti-sun side (position/rotation set by JS).
+   offset d = R*cos(theta) -> new moon (full cover) .. full moon (no cover) */
+.moon-shadow{position:absolute; inset:0; border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #0a1226 0%, #060c1c 70%, #040810 100%);}
 @keyframes moon-glow{0%,100%{box-shadow:0 0 22px 6px rgba(253,246,216,.22);} 50%{box-shadow:0 0 34px 12px rgba(253,246,216,.38);}}
 
 /* rotating Earth with real texture (2:1 equirectangular wrapped on a sphere) */

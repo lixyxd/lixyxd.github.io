@@ -122,13 +122,16 @@
   <!-- 太阳（绕地球公转：从行星边缘升起→划过天空→落回行星背后） -->
   <div class="bg-sun">
     <div class="sun-rays"></div>
-    <div class="sun"></div>
     <div class="sun-halo"></div>
+    <div class="sun"><div class="sun-surface"></div></div>
   </div>
 
-  <!-- 月球：绕地球公转（转至地球背面时被遮挡；月相随太阳方向变化） -->
+  <!-- 月球：绕地球公转（转至地球背面时被遮挡；月相随日月相对位置真实变化） -->
   <div class="moon-pos">
-    <div class="moon"><div class="moon-phase"></div></div>
+    <div class="moon">
+      <div class="moon-maria"></div>
+      <div class="moon-shadow"></div>
+    </div>
   </div>
 
   <!-- 三维地球（真实纹理，自转，太空视角；光照面跟随太阳） -->
