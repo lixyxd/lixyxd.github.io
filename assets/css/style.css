@@ -54,12 +54,18 @@ em{font-style:normal;}
 .starfield{position:absolute; inset:0; width:100%; height:100%; display:block;}
 .star{animation:twinkle 3.8s ease-in-out infinite;}
 @keyframes twinkle{0%,100%{opacity:.3;} 50%{opacity:1;}}
-.moon{position:absolute; right:16%; top:9%; width:74px; height:74px; border-radius:50%;
+.moon{position:absolute; inset:0; width:54px; height:54px; border-radius:50%;
   background:radial-gradient(circle at 38% 36%, #fdf6d8, #e8e0b8 55%, rgba(232,224,184,0) 72%);
-  box-shadow:0 0 42px 12px rgba(253,246,216,.32); opacity:.75;
-  animation:moon-glow 7s ease-in-out infinite, moon-drift 150s linear infinite alternate;}
-@keyframes moon-glow{0%,100%{box-shadow:0 0 42px 12px rgba(253,246,216,.28);} 50%{box-shadow:0 0 58px 18px rgba(253,246,216,.44);}}
-@keyframes moon-drift{from{transform:translate(0,0);} to{transform:translate(-7vw,2.5vh);}}
+  box-shadow:0 0 30px 8px rgba(253,246,216,.3); opacity:.85;
+  animation:orbit-rotate 50s linear infinite reverse, moon-glow 7s ease-in-out infinite;}
+@keyframes moon-glow{0%,100%{box-shadow:0 0 30px 8px rgba(253,246,216,.25);} 50%{box-shadow:0 0 42px 14px rgba(253,246,216,.4);}}
+
+/* moon orbits the earth (center = earth center; behind-earth pass hidden by globe) */
+.moon-orbit{position:absolute; left:50%; bottom:calc(-36vh + min(34vw,350px));
+  width:min(96vw,1900px); height:min(96vw,1900px);
+  transform:translate(-50%,50%); z-index:0; animation:orbit-rotate 50s linear infinite;}
+.moon-wrap{position:absolute; left:50%; top:0; transform:translate(-50%,-50%);}
+@keyframes orbit-rotate{to{transform:rotate(360deg);}}
 
 /* rotating Earth with real texture (2:1 equirectangular wrapped on a sphere) */
 .bg-globe{position:absolute; left:50%; bottom:-36%; width:min(68vw,700px); aspect-ratio:1/1;
@@ -75,6 +81,12 @@ em{font-style:normal;}
     radial-gradient(circle at 32% 26%, rgba(255,255,255,.18), rgba(255,255,255,0) 44%),
     radial-gradient(circle at 68% 82%, rgba(0,6,20,.5), rgba(0,0,0,0) 58%),
     radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,4,14,.45) 86%, rgba(0,3,12,.82) 100%);}
+/* daylight band sweeping across the earth, synced with the sun's pass (85s) */
+.globe-day{position:absolute; inset:0; border-radius:50%; pointer-events:none; overflow:hidden;
+  background:linear-gradient(90deg, transparent 0%, rgba(255,236,190,.15) 46%, rgba(255,236,190,.05) 50%, transparent 54%);
+  background-size:300% 100%; background-repeat:no-repeat;
+  animation:day-sweep 85s linear infinite;}
+@keyframes day-sweep{from{background-position:0% 0;} to{background-position:200% 0;}}
 
 /* celestial scene: orbit + satellite */
 .bg-track{position:absolute; inset:0; z-index:1; pointer-events:none;}

@@ -117,7 +117,6 @@
         <circle class="star" cx="887.0" cy="413.3" r="2.0" fill="#e8f2ff" opacity="0.58" style="animation-delay:1.68s;animation-duration:5.05s"/>
         <circle class="star" cx="261.1" cy="380.8" r="1.1" fill="#e8f2ff" opacity="0.68" style="animation-delay:2.68s;animation-duration:3.38s"/>
       </svg>
-    <div class="moon"></div>
   </div>
 
   <!-- 太阳（天体运动：东升西落，划过天空） -->
@@ -126,9 +125,17 @@
     <div class="sun-halo"></div>
   </div>
 
-  <!-- 三维地球（真实纹理，自转，太空视角） -->
+  <!-- 月球轨道：绕地球公转（转到地球背面时被地球遮挡） -->
+  <div class="moon-orbit">
+    <div class="moon-wrap"><div class="moon"></div></div>
+  </div>
+
+  <!-- 三维地球（真实纹理，自转，太空视角；光照面跟随太阳） -->
   <div class="bg-globe">
-    <div class="globe"><div class="globe-shade"></div></div>
+    <div class="globe">
+      <div class="globe-shade"></div>
+      <div class="globe-day"></div>
+    </div>
   </div>
 
   <!-- 轨道 + 雷达站 + 跟踪波束 + 卫星（合成 SVG，波束从雷达顶部打出并实时锁定轨道上的卫星） -->
