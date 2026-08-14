@@ -107,7 +107,7 @@ em{font-style:normal;}
 .pf{background:var(--panel); color:var(--dim); border:1px solid var(--line); border-radius:8px;
   padding:5px 13px; font-size:12.5px; cursor:pointer; font-family:inherit; transition:.15s;}
 .pf.active{color:var(--sky); border-color:var(--sky); background:color-mix(in srgb, var(--sky) 12%, transparent);}
-.pub-note{font-size:12px; color:var(--faint); margin-bottom:16px;}
+.pub-note{display:none; font-size:12px; color:var(--faint); margin-bottom:16px;}
 .pub-note a{color:var(--dim);}
 .pub-note em{color:var(--faint); font-size:11px; margin-left:6px;}
 .pub{display:flex; gap:16px; background:var(--panel); border:1px solid var(--line);
