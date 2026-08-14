@@ -14,10 +14,21 @@
 </head>
 <body>
 
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- 环境背景：雷达网格 + 光晕 -->
+<div class="bg" aria-hidden="true">
+  <span class="orb orb-sky"></span>
+  <span class="orb orb-violet"></span>
+  <span class="orb orb-amber"></span>
+  <div class="bg-grid"></div>
+  <div class="bg-vignette"></div>
+</div>
+
 <!-- ======================= 导航 Nav ======================= -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top">📡 <span>李小勇</span><em>Xiaoyong Li</em></a>
+    <a class="brand" href="#top">📡 <span class="brand-cn">李小勇</span><em>Xiaoyong Li</em></a>
     <nav class="links" id="navLinks">
       <a href="#about">关于 About</a>
       <a href="#timeline">经历 Timeline</a>
@@ -33,19 +44,22 @@
   <!-- ======================= Hero ======================= -->
   <section class="hero">
     <div class="hero-grid">
-      <img class="avatar" src="assets/img/author_photo.jpg" alt="Xiaoyong Li 照片">
+      <div class="avatar-wrap">
+        <img class="avatar" src="assets/img/author_photo.jpg" alt="Xiaoyong Li 照片">
+        <span class="avatar-status"><i></i>Hangzhou · 杭州</span>
+      </div>
       <div class="hero-text">
         <p class="hero-kicker">西安电子科技大学（杭州研究院）· Hangzhou Institute of Technology, Xidian University</p>
-        <h1>李小勇 <span class="en">Xiaoyong Li</span></h1>
+        <h1><span class="zh">李小勇</span> <span class="en">Xiaoyong Li</span></h1>
         <p class="hero-role">副研究员 · 硕士生导师</p>
         <p class="hero-role-en">Associate Researcher · Master's Supervisor</p>
         <p class="hero-focus">雷达成像 · 目标识别 · 深度学习</p>
         <p class="hero-focus-en">Radar Imaging · Target Recognition · Deep Learning</p>
         <div class="hero-stats">
-          <div class="stat"><b>16</b><span>论文总数<br><em>期刊 10 · 会议 6</em></span></div>
-          <div class="stat"><b>117</b><span>总被引<br><em>Google Scholar</em></span></div>
-          <div class="stat"><b>6</b><span>h-index<br><em>Google Scholar</em></span></div>
-          <div class="stat"><b>4</b><span>i10-index<br><em>Google Scholar</em></span></div>
+          <div class="stat"><b data-count="16">0</b><span>论文总数<br><em>期刊 10 · 会议 6</em></span></div>
+          <div class="stat"><b data-count="117">0</b><span>总被引<br><em>Google Scholar</em></span></div>
+          <div class="stat"><b data-count="6">0</b><span>h-index<br><em>Google Scholar</em></span></div>
+          <div class="stat"><b data-count="4">0</b><span>i10-index<br><em>Google Scholar</em></span></div>
         </div>
         <div class="hero-cta">
           <a class="btn primary" href="#publications">📄 查看论文 · Publications</a>
@@ -64,7 +78,7 @@
   <!-- ======================= About ======================= -->
   <section class="sec" id="about">
     <div class="sec-head">
-      <h2>关于我 <span class="en">About Me</span></h2>
+      <h2><span class="zh">关于我</span> <span class="en">About Me</span></h2>
       <div class="line"></div>
     </div>
     <div class="about-grid">
@@ -103,7 +117,7 @@
   <!-- ======================= Timeline ======================= -->
   <section class="sec" id="timeline">
     <div class="sec-head">
-      <h2>教育 · 工作经历 <span class="en">Education &amp; Experience</span></h2>
+      <h2><span class="zh">教育 · 工作经历</span> <span class="en">Education &amp; Experience</span></h2>
       <div class="line"></div>
     </div>
     <div class="tl-wrap">
@@ -174,7 +188,7 @@
   <!-- ======================= Publications ======================= -->
   <section class="sec" id="publications">
     <div class="sec-head">
-      <h2>论文发表 <span class="en">Publications</span></h2>
+      <h2><span class="zh">论文发表</span> <span class="en">Publications</span></h2>
       <div class="line"></div>
       <div class="pub-filters" role="group" aria-label="论文筛选">
         <button class="pf active" data-f="all">全部 All</button>
@@ -433,7 +447,7 @@
   <!-- ======================= Contact ======================= -->
   <section class="sec" id="contact">
     <div class="sec-head">
-      <h2>联系方式 <span class="en">Contact</span></h2>
+      <h2><span class="zh">联系方式</span> <span class="en">Contact</span></h2>
       <div class="line"></div>
     </div>
     <div class="contact-grid">
@@ -480,6 +494,8 @@
     </div>
   </div>
 </footer>
+
+<button class="to-top" id="toTop" aria-label="返回顶部" title="返回顶部">↑</button>
 
 <script src="assets/js/main.js"></script>
 </body>
