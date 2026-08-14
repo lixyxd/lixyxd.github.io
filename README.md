@@ -47,7 +47,7 @@ git push origin main     # 推送后网站自动更新
 
 ## 需要你补充的内容 / TODO
 
-- [ ] **Google Scholar 链接**：打开 `index.html`，搜索 `YOUR_SCHOLAR_ID`，替换为你的谷歌学术主页 ID（形如 `?user=xxxxxxxx`）；
+- [x] **Google Scholar 链接**：已配置（user=v3j2-6QAAAAJ）
 - [ ] 如有个人域名，可在 Settings → Pages 中配置 Custom domain（可选）。
 
 ## 数据来源 / Data Source
