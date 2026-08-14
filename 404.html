@@ -6,19 +6,40 @@
 <title>404 · 页面未找到</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
+  *{box-sizing:border-box; margin:0; padding:0;}
   body{margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
-    background:#0a101f; color:#dbe4f3; font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; text-align:center;}
-  .box{max-width:420px; padding:30px;}
-  .code{font-size:80px; font-weight:800; background:linear-gradient(135deg,#38bdf8,#a78bfa);
-    -webkit-background-clip:text; background-clip:text; color:transparent; margin:0;}
-  h1{font-size:18px; margin:10px 0;}
-  p{color:#8fa3c8; font-size:13px;}
-  a{display:inline-block; margin-top:18px; padding:9px 22px; border-radius:9px; text-decoration:none;
-    background:linear-gradient(135deg,#38bdf8,#2563eb); color:#04121f; font-weight:600; font-size:14px;}
-  a:hover{filter:brightness(1.12);}
+    background:#070d1c; color:#e2eaf8; font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; text-align:center; overflow:hidden;}
+  .bg{position:fixed; inset:0; z-index:0; pointer-events:none;}
+  .bg-grid{position:absolute; inset:-2px;
+    background-image:linear-gradient(rgba(56,189,248,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,.05) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+            mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);}
+  .orb{position:absolute; border-radius:50%; filter:blur(90px); opacity:.5;}
+  .orb-sky{width:440px; height:440px; top:-140px; left:50%; transform:translateX(-50%); background:radial-gradient(circle,#0e5aa8,transparent 65%);}
+  .orb-violet{width:380px; height:380px; bottom:-160px; left:-80px; background:radial-gradient(circle,#3b2f8f,transparent 65%);}
+  .box{position:relative; z-index:1; max-width:440px; padding:40px 36px; margin:0 18px;
+    background:rgba(15,26,48,.55); border:1px solid rgba(120,160,220,.2); border-radius:18px;
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:0 20px 60px rgba(2,6,18,.6);}
+  .code{font-size:84px; font-weight:800; line-height:1; margin:0;
+    background:linear-gradient(120deg,#38bdf8,#6366f1,#a78bfa);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(56,189,248,.35);}
+  h1{font-size:18px; margin:12px 0 8px;}
+  p{color:#9db2d6; font-size:13px;}
+  a{display:inline-block; margin-top:20px; padding:10px 24px; border-radius:11px; text-decoration:none;
+    background:linear-gradient(120deg,#38bdf8,#6366f1); color:#04121f; font-weight:600; font-size:14px;
+    box-shadow:0 6px 24px rgba(56,189,248,.35); transition:.2s;}
+  a:hover{filter:brightness(1.12); transform:translateY(-2px);}
 </style>
 </head>
 <body>
+  <div class="bg" aria-hidden="true">
+    <span class="orb orb-sky"></span>
+    <span class="orb orb-violet"></span>
+    <div class="bg-grid"></div>
+  </div>
   <div class="box">
     <p class="code">404</p>
     <h1>页面未找到 · Page Not Found</h1>
