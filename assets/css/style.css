@@ -445,6 +445,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
 /* responsive */
 @media (max-width:760px){
   .nav-toggle{display:block;}
+  .bg-globe{width:170vw; bottom:-68vw;}
   .links{position:absolute; top:60px; left:0; right:0; background:rgba(10,17,32,.97); border-bottom:1px solid var(--line);
     flex-direction:column; padding:12px 22px 18px; gap:4px; display:none; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
   .links.open{display:flex;}
