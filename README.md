@@ -52,7 +52,7 @@ git push origin main     # 推送后网站自动更新
 
 ## 数据来源 / Data Source
 
-论文列表与指标合并自 [Google Scholar](https://scholar.google.com/citations?user=v3j2-6QAAAAJ)（被引 117 · h-index 6）、[IEEE Xplore · Author 37089716785](https://ieeexplore.ieee.org/author/37089716785)（下载）与 [SciProfiles](https://sciprofiles.com/profile/lixyxd)（收录），去重后共 15 篇（抓取于 2026-08）。个人履历综合自 [西电杭州研究院主页](https://hz.xidian.edu.cn/info/1267/9514.htm) 与 [西电教师主页](https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm)。
+论文列表与指标合并自 [Google Scholar](https://scholar.google.com/citations?user=v3j2-6QAAAAJ)（被引 117 · h-index 6）、[IEEE Xplore · Author 37089716785](https://ieeexplore.ieee.org/author/37089716785)（下载）、[SciProfiles](https://sciprofiles.com/profile/lixyxd) 与 [Science China Information Sciences](https://www.sciengine.com/SCIS/doi/10.1007/s11432-025-5023-8)（收录），去重后共 16 篇（抓取于 2026-08）。个人履历综合自 [西电杭州研究院主页](https://hz.xidian.edu.cn/info/1267/9514.htm) 与 [西电教师主页](https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm)。
 
 ## 本地预览 / Preview Locally
 
