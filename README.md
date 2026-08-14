@@ -11,14 +11,18 @@ Associate Researcher, Hangzhou Institute of Technology, Xidian University · Rad
 
 ```
 .
-├── index.html      # 主页（中英双语）
+├── index.html      # 主页（中英双语，深色科技风）
 ├── 404.html        # 404 页面
 ├── .nojekyll       # 禁用 Jekyll（纯静态站点）
 └── assets/
-    ├── css/style.css     # 样式（深色科技风）
-    ├── js/main.js        # 交互（导航 / 滚动显现 / 论文筛选）
+    ├── css/style.css     # 样式（雷达网格背景 / 玻璃拟态 / 渐变光效 / 微动画）
+    ├── js/main.js        # 交互（导航 / 滚动显现 / 论文筛选 / 数字滚动 / 进度条 / 返回顶部 / 导航高亮）
     └── img/author_photo.jpg
 ```
+
+## 版本记录 / Changelog
+
+- **2026-08 美化改版**：深色科技风精修 —— 雷达网格 + 光晕动态背景、玻璃拟态卡片、标题渐变字、头像雷达扫描环、统计数字滚动、滚动进度条、返回顶部、滚动导航高亮、404 页面同步美化。改动均以 git 提交记录，可随时回退。
 
 ## 部署与更新 / Deploy & Update
 
