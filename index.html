@@ -120,28 +120,12 @@
     <div class="moon"></div>
   </div>
 
-  <!-- 卫星（天上，缓慢漂移 + 浮动） -->
-  <div class="bg-sat-drift" style="left:66vw; top:16vh;">
-    <div class="bg-sat">
-      <svg viewBox="0 0 120 90" width="120" height="90">
-        <rect x="40" y="26" width="42" height="28" rx="6" fill="rgba(148,197,255,.55)" stroke="rgba(190,233,255,.95)" stroke-width="1.6"/>
-        <rect x="82" y="32" width="34" height="9" rx="2.5" fill="rgba(125,211,252,.8)"/>
-        <rect x="6" y="32" width="34" height="9" rx="2.5" fill="rgba(125,211,252,.8)"/>
-        <circle cx="55" cy="40" r="4.5" fill="#e6f7ff"/>
-        <line x1="61" y1="54" x2="86" y2="82" stroke="rgba(125,211,252,.85)" stroke-width="1.8"/>
-        <line x1="61" y1="54" x2="36" y2="82" stroke="rgba(125,211,252,.85)" stroke-width="1.8"/>
-        <circle cx="88" cy="84" r="2.6" fill="#7dd3fc"/>
-        <circle cx="34" cy="84" r="2.6" fill="#7dd3fc"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- 中国版图（3D 地面，透视倾斜） -->
-  <div class="bg-ground">
-    <div class="china-plane">
-      <svg viewBox="0 0 780 430" preserveAspectRatio="xMidYMax meet">
-        <path d="M532.8,274.5 L548.2,263.7 L558.2,266.4 L557.6,261.9 L569.4,258.9 L570.8,254.8 L576.1,258.9 L574.4,256.8 L580.8,252.1 L578.3,241.8 L584.8,238.3 L593.7,239.8 L607.5,216.5 L578.8,221.7 L576.3,213.3 L554.1,206.7 L547.2,190.3 L540.5,183.6 L525.7,180.3 L507.1,182.2 L501.1,185.8 L506.4,190.2 L494.7,202.7 L496.3,204.3 L485.4,208.8 L477.7,206.5 L469.3,218.5 L472.2,221.8 L490.8,219.6 L500.3,228.9 L482.7,229.6 L455.9,242.5 L444.4,240.1 L440.3,245.3 L444.0,250.0 L433.3,256.4 L412.4,258.7 L395.0,264.9 L365.7,257.2 L334.1,256.8 L327.2,245.7 L295.2,239.4 L296.5,228.6 L291.7,222.1 L274.7,215.5 L273.6,211.3 L267.0,211.6 L264.9,215.7 L257.8,218.2 L257.6,226.2 L239.8,225.1 L234.4,236.4 L236.5,239.3 L217.6,241.4 L221.2,243.4 L224.1,253.6 L219.4,261.7 L196.4,268.8 L192.5,273.6 L182.0,272.4 L172.5,280.4 L174.6,285.9 L182.1,286.8 L184.1,294.7 L179.5,296.7 L189.2,299.6 L191.3,305.5 L205.3,307.9 L206.2,314.0 L211.6,316.1 L209.1,320.9 L213.5,328.3 L207.1,328.8 L212.0,339.7 L226.4,346.6 L233.3,344.2 L260.8,361.4 L280.3,360.3 L281.8,366.4 L287.5,359.1 L299.4,360.8 L303.9,368.9 L314.2,368.3 L329.5,358.8 L339.1,362.6 L343.3,357.1 L350.5,363.9 L351.0,370.5 L350.5,375.9 L342.3,383.8 L342.2,389.6 L351.7,388.0 L351.8,394.6 L356.5,396.6 L354.1,402.4 L359.4,402.8 L361.3,406.9 L367.6,404.8 L368.3,408.6 L372.1,409.2 L371.4,399.8 L377.4,397.7 L381.0,400.0 L383.1,397.5 L387.6,399.6 L397.2,393.3 L407.9,397.5 L406.9,403.4 L411.6,406.0 L429.5,407.1 L429.8,415.8 L434.1,414.3 L431.7,409.9 L453.3,404.1 L456.2,398.0 L462.1,400.1 L476.2,396.6 L493.7,382.8 L493.2,380.2 L499.9,378.8 L497.2,377.5 L500.6,372.4 L497.9,370.5 L501.9,370.4 L508.4,360.1 L512.4,359.0 L512.2,352.5 L514.9,352.9 L516.0,347.4 L508.4,342.7 L515.9,342.5 L510.4,336.0 L514.9,336.3 L514.0,332.9 L507.7,328.2 L503.1,316.3 L495.3,311.5 L502.2,302.9 L518.8,297.9 L520.0,294.5 L506.1,291.3 L496.1,296.4 L493.6,289.5 L486.9,288.7 L484.3,284.3 L493.3,282.2 L508.8,269.9 L516.9,272.7 L509.5,279.2 L513.1,280.5 L508.9,285.1 L532.8,274.5 Z" fill="rgba(56,189,248,.13)" stroke="rgba(148,216,255,.8)" stroke-width="2.2" stroke-linejoin="round"/>
-      </svg>
+  <!-- 三维地球（太空视角，下半部入画） -->
+  <div class="bg-globe">
+    <div class="globe">
+      <div class="globe-lines"></div>
+      <div class="globe-land"></div>
+      <div class="globe-cloud"></div>
     </div>
   </div>
 
@@ -161,19 +145,32 @@
     </svg>
   </div>
 
-  <!-- 定向跟踪波束（雷达 → 卫星，垂直向上） -->
+  <!-- 定向跟踪波束 + 卫星（过境扫描：波束绕雷达旋转，卫星始终在波束顶端） -->
   <div class="bg-beam" style="left:54%;">
-    <svg viewBox="0 0 60 480" preserveAspectRatio="none">
+    <svg viewBox="0 0 70 520" preserveAspectRatio="none">
       <defs>
         <linearGradient id="beamV" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0" stop-color="rgba(56,189,248,.5)"/>
-          <stop offset=".35" stop-color="rgba(56,189,248,.18)"/>
+          <stop offset="0" stop-color="rgba(56,189,248,.55)"/>
+          <stop offset=".35" stop-color="rgba(56,189,248,.2)"/>
           <stop offset="1" stop-color="rgba(56,189,248,0)"/>
         </linearGradient>
       </defs>
-      <path d="M 30 470 L 4 0 L 56 0 Z" fill="url(#beamV)"/>
-      <line x1="30" y1="470" x2="30" y2="0" stroke="rgba(125,211,252,.55)" stroke-width="2" stroke-dasharray="3 10" class="r-axis"/>
-      <line x1="30" y1="470" x2="30" y2="0" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 52" class="r-wave"/>
+      <path d="M 35 500 L 6 20 L 64 20 Z" fill="url(#beamV)"/>
+      <line x1="35" y1="500" x2="35" y2="16" stroke="rgba(148,216,255,.6)" stroke-width="1.8" stroke-dasharray="3 10" class="r-axis"/>
+      <line x1="35" y1="500" x2="35" y2="16" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 52" class="r-wave"/>
+      <!-- 卫星：挂在波束顶端，过境时沿波束进出（进站-过顶-出站） -->
+      <g class="r-sat-track">
+        <g class="r-sat">
+          <rect x="27" y="0" width="16" height="20" rx="4" fill="rgba(148,197,255,.65)" stroke="rgba(190,233,255,1)" stroke-width="1.5"/>
+          <rect x="43" y="4" width="12" height="6" rx="2" fill="rgba(125,211,252,.9)"/>
+          <rect x="15" y="4" width="12" height="6" rx="2" fill="rgba(125,211,252,.9)"/>
+          <circle cx="31" cy="10" r="3" fill="#e6f7ff"/>
+          <line x1="35" y1="20" x2="49" y2="36" stroke="rgba(125,211,252,.95)" stroke-width="1.6"/>
+          <line x1="35" y1="20" x2="21" y2="36" stroke="rgba(125,211,252,.95)" stroke-width="1.6"/>
+          <circle cx="50" cy="38" r="2" fill="#7dd3fc"/>
+          <circle cx="20" cy="38" r="2" fill="#7dd3fc"/>
+        </g>
+      </g>
     </svg>
   </div>
 
