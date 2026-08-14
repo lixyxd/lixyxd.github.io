@@ -2,8 +2,8 @@
 
 **李小勇 Xiaoyong Li · 个人主页 / Personal Homepage**
 
-西安电子科技大学杭州研究院准聘副教授 · 雷达成像 / 目标识别 / 深度学习
-Tenure-Track Associate Professor, Hangzhou Institute of Technology, Xidian University · Radar Imaging / Target Recognition / Deep Learning
+西安电子科技大学（杭州研究院）副研究员 · 雷达成像 / 目标识别 / 深度学习
+Associate Researcher, Hangzhou Institute of Technology, Xidian University · Radar Imaging / Target Recognition / Deep Learning
 
 访问 / Visit: **https://lixyxd.github.io**
 
@@ -52,7 +52,7 @@ git push origin main     # 推送后网站自动更新
 
 ## 数据来源 / Data Source
 
-论文列表、被引与下载数据来自 [IEEE Xplore · Author 37089716785](https://ieeexplore.ieee.org/author/37089716785)（抓取于 2026-08）。个人履历综合自 [西电杭州研究院主页](https://hz.xidian.edu.cn/info/1267/9514.htm) 与 [西电教师主页](https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm)。
+论文列表与指标合并自 [Google Scholar](https://scholar.google.com/citations?user=v3j2-6QAAAAJ)（被引 117 · h-index 6）、[IEEE Xplore · Author 37089716785](https://ieeexplore.ieee.org/author/37089716785)（下载）与 [SciProfiles](https://sciprofiles.com/profile/lixyxd)（收录），去重后共 15 篇（抓取于 2026-08）。个人履历综合自 [西电杭州研究院主页](https://hz.xidian.edu.cn/info/1267/9514.htm) 与 [西电教师主页](https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm)。
 
 ## 本地预览 / Preview Locally
 
