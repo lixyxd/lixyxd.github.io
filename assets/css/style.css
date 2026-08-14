@@ -126,6 +126,7 @@ em{font-style:normal;}
 .chip{font-size:10.5px; border-radius:6px; padding:2px 8px;}
 .chip.first{background:color-mix(in srgb, var(--amber) 18%, transparent); color:var(--amber);}
 .chip.co{background:var(--panel2); color:var(--faint);}
+.chip.corr{background:color-mix(in srgb, var(--rose) 18%, transparent); color:var(--rose);}
 .m.cite{color:var(--amber);} .m.dl{color:var(--dim);} .m.doi a{color:var(--faint);} .m.doi a:hover{color:var(--sky);}
 .pub.hidden{display:none;}
 
