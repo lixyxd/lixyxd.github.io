@@ -16,13 +16,61 @@
 
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<!-- 环境背景：雷达网格 + 光晕 -->
+<!-- 环境背景：雷达网格 + 光晕 + 地基雷达观测卫星 -->
 <div class="bg" aria-hidden="true">
   <span class="orb orb-sky"></span>
   <span class="orb orb-violet"></span>
   <span class="orb orb-amber"></span>
   <div class="bg-grid"></div>
   <div class="bg-vignette"></div>
+  <div class="radar-scene">
+    <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <linearGradient id="beamGrad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="rgba(56,189,248,0)"/>
+          <stop offset="1" stop-color="rgba(56,189,248,.5)"/>
+        </linearGradient>
+        <radialGradient id="dishGrad" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="rgba(56,189,248,.55)"/>
+          <stop offset="1" stop-color="rgba(56,189,248,.12)"/>
+        </radialGradient>
+      </defs>
+      <!-- 地基雷达站 -->
+      <g class="r-station">
+        <ellipse cx="118" cy="552" rx="88" ry="9" fill="rgba(56,189,248,.12)"/>
+        <rect x="70" y="522" width="96" height="18" rx="4" fill="rgba(56,189,248,.18)"/>
+        <rect x="111" y="436" width="14" height="92" rx="4" fill="rgba(56,189,248,.3)"/>
+        <path d="M62 450 Q118 394 174 450 Z" fill="url(#dishGrad)" stroke="rgba(125,211,252,.6)" stroke-width="2.5"/>
+        <line x1="118" y1="436" x2="118" y2="404" stroke="rgba(125,211,252,.75)" stroke-width="3"/>
+        <circle cx="118" cy="399" r="5" fill="#7dd3fc"/>
+        <circle cx="118" cy="399" r="10" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1"/>
+      </g>
+      <!-- 旋转扫描波束 -->
+      <g class="r-sweep">
+        <path d="M118 399 L 580 30 L 440 200 Z" fill="url(#beamGrad)"/>
+      </g>
+      <!-- 脉冲扩展波环 -->
+      <g class="r-arcs">
+        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="2" class="r-arc"/>
+        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="2" class="r-arc" style="animation-delay:.9s"/>
+        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="2" class="r-arc" style="animation-delay:1.8s"/>
+      </g>
+      <!-- 指向卫星的电磁波 -->
+      <path class="r-beam" d="M118 403 C 300 330 520 260 804 150" fill="none" stroke="rgba(125,211,252,.4)" stroke-width="2" stroke-dasharray="3 9"/>
+      <path class="r-wave" d="M118 403 C 300 330 520 260 804 150" fill="none" stroke="#7dd3fc" stroke-width="2.2" stroke-dasharray="16 46"/>
+      <!-- 卫星（缓慢漂移 + 浮动） -->
+      <g class="r-sat-drift">
+        <g class="r-sat">
+          <rect x="788" y="136" width="38" height="24" rx="5" fill="rgba(148,197,255,.5)" stroke="rgba(125,211,252,.85)" stroke-width="1.5"/>
+          <rect x="826" y="142" width="30" height="7" rx="2" fill="rgba(125,211,252,.65)"/>
+          <rect x="760" y="142" width="30" height="7" rx="2" fill="rgba(125,211,252,.65)"/>
+          <circle cx="800" cy="148" r="3.5" fill="#7dd3fc"/>
+          <line x1="807" y1="160" x2="830" y2="186" stroke="rgba(125,211,252,.7)" stroke-width="1.5"/>
+          <line x1="807" y1="160" x2="784" y2="186" stroke="rgba(125,211,252,.7)" stroke-width="1.5"/>
+        </g>
+      </g>
+    </svg>
+  </div>
 </div>
 
 <!-- ======================= 导航 Nav ======================= -->
@@ -222,7 +270,7 @@
         <div class="pub-main">
           <h3><a href="https://ieeexplore.ieee.org/document/11653553" target="_blank" rel="noopener">Frequency-Fused U-KAN for Structural Component Segmentation in ISAR Images of Space Targets</a></h3>
           <p class="pub-authors"><b>Xiaoyong Li</b>, Jiarui Duan, Rongzhen Du, Xuemei Ren, Wanting Zhou, Lei Liu, Xueru Bai, Feng Zhou</p>
-          <p class="pub-venue">IEEE Transactions on Aerospace and Electronic Systems (Early Access) · vol. PP, no. 99, pp. 1–17<span class="jif">IF 5.7 · JCR Q1 · 中科院 2区</span></p>
+          <p class="pub-venue">IEEE Transactions on Aerospace and Electronic Systems (Early Access) · vol. PP, no. 99, pp. 1–17<span class="jif">IF 7.0 · JCR Q1 · 中科院 2区</span></p>
           <div class="pub-meta">
             <span class="chip first">第一作者 First Author</span>
             <span class="m cite">★ 0 被引</span>
@@ -266,7 +314,7 @@
         <div class="pub-main">
           <h3><a href="https://ieeexplore.ieee.org/document/10854535" target="_blank" rel="noopener">Tuning-Free ISAR Imaging Based on Single-Step Deep Reinforcement Learning With Swin Transformer</a></h3>
           <p class="pub-authors"><b>Xiaoyong Li</b>, Jiale Huang, Xueru Bai, Lei Liu, Xiaoran Shi, Feng Zhou</p>
-          <p class="pub-venue">IEEE Transactions on Geoscience and Remote Sensing · vol. 63, pp. 1–13<span class="jif">IF 8.6 · JCR Q1 · 中科院 1区</span></p>
+          <p class="pub-venue">IEEE Transactions on Geoscience and Remote Sensing · vol. 63, pp. 1–13<span class="jif">IF 9.4 · JCR Q1 · 中科院 1区</span></p>
           <div class="pub-meta">
             <span class="chip first">第一作者 First Author</span>
             <span class="m cite">★ 12 被引</span>
@@ -282,7 +330,7 @@
         <div class="pub-main">
           <h3><a href="https://ieeexplore.ieee.org/document/10938613" target="_blank" rel="noopener">HNet: A Loss Rate Robust ISAR Imaging Framework Based on Hypernetwork</a></h3>
           <p class="pub-authors"><b>Xiaoyong Li</b>, Lei Liu, Jiale Huang, Lei Li, Xueru Bai, Feng Zhou</p>
-          <p class="pub-venue">IEEE Transactions on Aerospace and Electronic Systems · vol. 61, no. 4, pp. 9434–9449<span class="jif">IF 5.7 · JCR Q1 · 中科院 2区</span></p>
+          <p class="pub-venue">IEEE Transactions on Aerospace and Electronic Systems · vol. 61, no. 4, pp. 9434–9449<span class="jif">IF 7.0 · JCR Q1 · 中科院 2区</span></p>
           <div class="pub-meta">
             <span class="chip first">第一作者 First Author</span>
             <span class="m cite">★ 9 被引</span>
@@ -298,7 +346,7 @@
         <div class="pub-main">
           <h3><a href="https://ieeexplore.ieee.org/document/10988893" target="_blank" rel="noopener">Joint Motion Compensation Radar Imaging Based on Bi-XLSTM and BP Algorithm</a></h3>
           <p class="pub-authors">Xuemei Ren, <b>Xiaoyong Li</b>, Pengshuai Rong, Wanting Zhou, Lei Liu, Xueru Bai, Feng Zhou</p>
-          <p class="pub-venue">IEEE Transactions on Radar Systems · vol. 3, pp. 738–755<span class="jif">新刊 · 暂无 JCR</span></p>
+          <p class="pub-venue">IEEE Transactions on Radar Systems · vol. 3, pp. 738–755<span class="jif">IF 3.5 · 新刊</span></p>
           <div class="pub-meta">
             <span class="chip corr">通讯作者 Corresponding Author</span>
             <span class="m cite">★ 3 被引</span>
