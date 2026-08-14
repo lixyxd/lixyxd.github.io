@@ -120,6 +120,12 @@
     <div class="moon"></div>
   </div>
 
+  <!-- 太阳（天体运动：东升西落，划过天空） -->
+  <div class="bg-sun">
+    <div class="sun"></div>
+    <div class="sun-halo"></div>
+  </div>
+
   <!-- 三维地球（真实纹理，自转，太空视角） -->
   <div class="bg-globe">
     <div class="globe"><div class="globe-shade"></div></div>
@@ -140,27 +146,8 @@
       <path class="orbit" d="M 60 620 Q 600 40 1140 600" fill="none" stroke="rgba(148,197,255,.22)"
             stroke-width="1.8" stroke-dasharray="3 10"/>
 
-      <!-- 雷达站（碗口朝上，馈源即波束发射点） -->
-      <g class="r-station">
-        <rect x="556" y="488" width="88" height="16" rx="4" fill="rgba(148,216,255,.6)"/>
-        <rect x="594" y="420" width="12" height="72" rx="4" fill="rgba(148,216,255,.6)"/>
-        <path d="M 546 402 Q 600 438 654 402 Z" fill="rgba(125,211,252,.4)" stroke="rgba(190,233,255,.9)" stroke-width="2"/>
-        <line x1="600" y1="402" x2="600" y2="452" stroke="rgba(190,233,255,.95)" stroke-width="2.2"/>
-        <circle cx="600" cy="452" r="4.2" fill="#e6f7ff"/>
-        <g class="r-arcs">
-          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="1.8" class="r-arc"/>
-          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="1.8" class="r-arc" style="animation-delay:.8s"/>
-          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.8" class="r-arc" style="animation-delay:1.6s"/>
-        </g>
       </g>
 
-      <!-- 跟踪波束：从馈源点向上打出，由 JS 实时旋转锁定卫星 -->
-      <g transform="translate(600,452)">
-        <g id="beamGroup">
-          <path d="M -16 0 L -6 -560 L 6 -560 L 16 0 Z" fill="url(#beamGrad)"/>
-          <line x1="0" y1="0" x2="0" y2="-560" stroke="rgba(148,216,255,.55)" stroke-width="2" stroke-dasharray="3 10" class="r-axis"/>
-          <line x1="0" y1="0" x2="0" y2="-560" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 52" class="r-wave"/>
-        </g>
       </g>
 
       <!-- 卫星：沿轨道飞行（SMIL 动画），姿态随轨道自动倾斜 -->
