@@ -253,6 +253,8 @@ em{font-style:normal;}
   background:rgba(15,26,48,.35); transition:.18s; display:inline-flex; align-items:center; gap:5px;}
 .badge-ic{font-size:12px; line-height:1;}
 .hero-badges a:hover{color:var(--sky); border-color:rgba(56,189,248,.5); background:rgba(56,189,248,.08); text-decoration:none; transform:translateY(-1px);}
+.hero-badges a.unit{color:var(--amber); border-color:rgba(251,191,36,.45); background:rgba(251,191,36,.08); font-weight:600;}
+.hero-badges a.unit:hover{color:var(--amber); border-color:rgba(251,191,36,.75); background:rgba(251,191,36,.14); box-shadow:0 0 16px rgba(251,191,36,.28);}
 
 /* ---------- sections ---------- */
 .sec{max-width:1080px; margin:0 auto; padding:50px 22px; scroll-margin-top:76px;}
@@ -407,7 +409,7 @@ em{font-style:normal;}
   gap:14px; flex-wrap:wrap; font-size:13.5px; color:var(--dim); position:relative; z-index:2;}
 .footer-brand{display:flex; align-items:center; gap:12px;}
 .footer-logo{flex:none; filter:drop-shadow(0 0 5px rgba(56,189,248,.5));}
-.footer-brand b{display:block; font-size:15px; color:var(--txt); letter-spacing:.5px; font-weight:700;}
+.footer-brand b{display:block; font-size:14px; color:var(--sky); letter-spacing:.5px; font-weight:600;}
 .footer-brand span{font-size:12.5px; color:var(--faint);}
 .footer-links{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
 .footer-links a{color:var(--dim); font-size:13px; transition:color .18s;}
