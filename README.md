@@ -11,53 +11,25 @@ Associate Researcher, Hangzhou Institute of Technology, Xidian University · Rad
 
 ```
 .
-├── index.html            # 主页（中英双语）
-├── 404.html              # 404 页面
-├── .nojekyll             # 禁用 Jekyll（纯静态站点）
+├── index.html      # 主页（中英双语）
+├── 404.html        # 404 页面
+├── .nojekyll       # 禁用 Jekyll（纯静态站点）
 └── assets/
     ├── css/style.css     # 样式（深色科技风）
     ├── js/main.js        # 交互（导航 / 滚动显现 / 论文筛选）
     └── img/author_photo.jpg
 ```
 
-## 部署方式 / How It's Deployed
+## 部署与更新 / Deploy & Update
 
-本站使用 **GitHub Pages 分支部署（Deploy from a branch）**，无需 Actions 工作流：
-
-- 部署源：`main` 分支根目录 `/`
-- **每次向 `main` 分支推送更新，网站都会自动重新构建并发布**，几分钟内生效
-- 相关设置位于：仓库 **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main / (root)**
-
-> 提示：首次启用时选过主题 `jekyll-theme-cayman`，但仓库内的 `.nojekyll` 文件会禁用 Jekyll 处理，因此实际以纯静态 HTML 呈现，`_config.yml` 不生效（保留无影响）。
-
-## 本地更新步骤 / How to Update
+GitHub Pages 分支部署：`Settings → Pages → Source: Deploy from a branch → main / (root)`。推送到 `main` 分支后网站自动更新：
 
 ```bash
-# 克隆仓库
-git clone https://github.com/lixyxd/lixyxd.github.io.git
-cd lixyxd.github.io
-
-# 修改 index.html / assets 后提交推送
-git add -A
-git commit -m "update homepage"
-git push origin main     # 推送后网站自动更新
+git add -A && git commit -m "update homepage" && git push origin main
 ```
-
-不想用命令行的话，也可以直接在 GitHub 网页上编辑 `index.html`（打开文件 → 铅笔图标 → 修改 → Commit changes），同样会自动重新部署。
-
-## 需要你补充的内容 / TODO
-
-- [x] **Google Scholar 链接**：已配置（user=v3j2-6QAAAAJ）
-- [ ] 如有个人域名，可在 Settings → Pages 中配置 Custom domain（可选）。
-
-## 数据来源 / Data Source
-
-论文列表与指标合并自 [Google Scholar](https://scholar.google.com/citations?user=v3j2-6QAAAAJ)（被引 117 · h-index 6）、[IEEE Xplore · Author 37089716785](https://ieeexplore.ieee.org/author/37089716785)（下载）、[SciProfiles](https://sciprofiles.com/profile/lixyxd) 与 [Science China Information Sciences](https://www.sciengine.com/SCIS/doi/10.1007/s11432-025-5023-8)（收录），去重后共 16 篇（抓取于 2026-08）。**2025–2026 年论文中非第一作者者均为通讯作者。** 个人履历综合自 [西电杭州研究院主页](https://hz.xidian.edu.cn/info/1267/9514.htm) 与 [西电教师主页](https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm)。
 
 ## 本地预览 / Preview Locally
 
 ```bash
-# 任选其一
 python -m http.server 8080     # 然后访问 http://localhost:8080
-npx serve .
 ```
