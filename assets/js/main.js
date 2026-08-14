@@ -1,8 +1,10 @@
-/* 李小勇 Xiaoyong Li · personal homepage interactions */
+/* 李小勇 Xiaoyong Li · personal homepage interactions
+   v2: tabbed sections + publication year filter */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TABS = ['about', 'timeline', 'publications', 'contact'];
 
   /* ---- mobile nav toggle ---- */
   var toggle = document.getElementById('navToggle');
@@ -16,8 +18,39 @@
     });
   }
 
-  /* ---- reveal on scroll ---- */
-  var revealEls = document.querySelectorAll('.sec, .pub, .honor-card, .contact-card, .tl-item');
+  /* ---- tabbed sections ---- */
+  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
+  var activateTab = function (id, scroll) {
+    if (TABS.indexOf(id) === -1) id = 'about';
+    document.body.classList.add('tabs-enabled');
+    TABS.forEach(function (s) {
+      var el = document.getElementById(s);
+      if (el) el.classList.toggle('active', s === id);
+    });
+    navAnchors.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+    if (scroll) {
+      var sec = document.getElementById(id);
+      if (sec) sec.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    }
+  };
+  var tabFromHash = function () { return (location.hash || '#about').replace('#', ''); };
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (TABS.indexOf(id) === -1) return; // #top etc. keep default behavior
+      e.preventDefault();
+      if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+      activateTab(id, true);
+    });
+  });
+  window.addEventListener('hashchange', function () { activateTab(tabFromHash(), true); });
+  activateTab(tabFromHash(), false);
+
+  /* ---- reveal on scroll (staggered) ---- */
+  var revealEls = document.querySelectorAll('.pub, .honor-card, .contact-card, .tl-item');
   if (!reduceMotion && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -29,21 +62,26 @@
     }, { threshold: 0.08 });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
-    revealEls.forEach(function (el) { el.classList.add('reveal', 'in'); });
+    revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---- publication filter ---- */
-  var filters = document.querySelectorAll('.pub-filters .pf');
-  var pubs = document.querySelectorAll('.pub');
-  filters.forEach(function (btn) {
+  /* ---- publication filters (type + year) ---- */
+  var applyFilters = function () {
+    var f = (document.querySelector('.pub-filters .pf.active[data-f]') || {}).getAttribute ? document.querySelector('.pub-filters .pf.active[data-f]').getAttribute('data-f') : 'all';
+    var y = (document.querySelector('.pub-filters.year .pf.active') || {}).getAttribute ? document.querySelector('.pub-filters.year .pf.active').getAttribute('data-year') : 'all';
+    document.querySelectorAll('.pub').forEach(function (p) {
+      var showType = f === 'all' || p.getAttribute('data-type') === f;
+      var py = p.querySelector('.pub-year');
+      var showYear = y === 'all' || (py && py.textContent.trim() === y);
+      p.classList.toggle('hidden', !(showType && showYear));
+    });
+  };
+  document.querySelectorAll('.pub-filters .pf').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      filters.forEach(function (b) { b.classList.remove('active'); });
+      var group = btn.parentElement.classList.contains('year') ? '.pub-filters.year' : '.pub-filters';
+      document.querySelectorAll(group + ' .pf').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      var f = btn.getAttribute('data-f');
-      pubs.forEach(function (p) {
-        var show = f === 'all' || p.getAttribute('data-type') === f;
-        p.classList.toggle('hidden', !show);
-      });
+      applyFilters();
     });
   });
 
@@ -70,28 +108,6 @@
     toTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
-  }
-
-  /* ---- scrollspy: highlight active nav link ---- */
-  var navAnchors = document.querySelectorAll('.links a[href^="#"]');
-  var sections = [];
-  navAnchors.forEach(function (a) {
-    var sec = document.querySelector(a.getAttribute('href'));
-    if (sec) sections.push({ link: a, sec: sec });
-  });
-  var spy = function () {
-    var pos = (window.scrollY || document.documentElement.scrollTop) + 110;
-    var current = null;
-    sections.forEach(function (s) {
-      if (pos >= s.sec.offsetTop) current = s;
-    });
-    sections.forEach(function (s) {
-      s.link.classList.toggle('active', s === current);
-    });
-  };
-  if (sections.length) {
-    window.addEventListener('scroll', spy, { passive: true });
-    spy();
   }
 
   /* ---- hero stats count-up ---- */
