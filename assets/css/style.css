@@ -49,21 +49,21 @@ em{font-style:normal;}
 @keyframes orb-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(28px,-34px);}}
 .bg-vignette{position:absolute; inset:0; background:radial-gradient(ellipse 120% 80% at 50% -10%, transparent 40%, rgba(4,8,18,.7) 100%);}
 
-/* ---------- radar scene (ground radar watching satellite) ---------- */
+/* ---------- radar scene (starry sky + China map + ground radar tracking satellite) ---------- */
 .radar-scene{position:fixed; left:0; right:0; bottom:0; height:62vh; z-index:0; pointer-events:none; opacity:.9;}
 .radar-scene svg{width:100%; height:100%; display:block;}
-.r-sweep{transform-origin:118px 399px; animation:sweep 8s linear infinite;}
-@keyframes sweep{to{transform:rotate(360deg);}}
-.r-arc{transform-origin:118px 399px; animation:arc-pulse 3s ease-out infinite;}
-@keyframes arc-pulse{0%{transform:scale(.4); opacity:.95;} 100%{transform:scale(3.6); opacity:0;}}
-.r-wave{animation:wave-dash 2.2s linear infinite;}
-@keyframes wave-dash{to{stroke-dashoffset:-150;}}
-.r-beam{animation:beam-dash 1.4s linear infinite;}
-@keyframes beam-dash{to{stroke-dashoffset:-120;}}
-.r-sat-drift{animation:sat-drift 30s ease-in-out infinite alternate;}
-@keyframes sat-drift{from{transform:translateX(0);} to{transform:translateX(-46px);}}
-.r-sat{animation:sat-float 5.5s ease-in-out infinite;}
-@keyframes sat-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(11px,-9px);}}
+.star{animation:twinkle 3.6s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:.25;} 50%{opacity:1;}}
+.r-orbit{opacity:.8;}
+.r-arc{transform-origin:636px 495px; animation:arc-pulse 3s ease-out infinite;}
+@keyframes arc-pulse{0%{transform:scale(.5); opacity:.95;} 100%{transform:scale(4.2); opacity:0;}}
+.r-wave{animation:wave-dash 2s linear infinite;}
+@keyframes wave-dash{to{stroke-dashoffset:-170;}}
+.r-china{filter:drop-shadow(0 0 6px rgba(56,189,248,.25));}
+.r-sat-drift{animation:sat-drift 34s ease-in-out infinite alternate;}
+@keyframes sat-drift{from{transform:translateX(0);} to{transform:translateX(-56px);}}
+.r-sat{animation:sat-float 6s ease-in-out infinite;}
+@keyframes sat-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(12px,-10px);}}
 
 /* highlight card (annual review) */
 .honor-card.hl{border-color:rgba(251,191,36,.5); box-shadow:0 0 0 1px rgba(251,191,36,.15), 0 12px 34px rgba(2,6,18,.5);}

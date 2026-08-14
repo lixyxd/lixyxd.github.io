@@ -23,55 +23,138 @@
   <span class="orb orb-amber"></span>
   <div class="bg-grid"></div>
   <div class="bg-vignette"></div>
-  <div class="radar-scene">
-    <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMax meet">
+  <div class="radar-scene" aria-hidden="true">
+    <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMax meet">
       <defs>
         <linearGradient id="beamGrad" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stop-color="rgba(56,189,248,0)"/>
-          <stop offset="1" stop-color="rgba(56,189,248,.5)"/>
+          <stop offset="1" stop-color="rgba(56,189,248,.45)"/>
         </linearGradient>
-        <radialGradient id="dishGrad" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="rgba(56,189,248,.55)"/>
-          <stop offset="1" stop-color="rgba(56,189,248,.12)"/>
+        <radialGradient id="siteGlow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="rgba(125,211,252,.9)"/>
+          <stop offset=".6" stop-color="rgba(56,189,248,.35)"/>
+          <stop offset="1" stop-color="rgba(56,189,248,0)"/>
         </radialGradient>
       </defs>
-      <!-- 地基雷达站 -->
+
+      <!-- 星星 -->
+      <g class="r-sky">
+        <circle class="star" cx="868.6" cy="304.9" r="1.8" fill="#cfe6ff" opacity="0.79" style="animation-delay:1.45s;animation-duration:3.82s"/>
+        <circle class="star" cx="1021.9" cy="230.2" r="1.8" fill="#cfe6ff" opacity="0.61" style="animation-delay:2.07s;animation-duration:2.69s"/>
+        <circle class="star" cx="1104.8" cy="388.0" r="1.0" fill="#cfe6ff" opacity="0.43" style="animation-delay:3.59s;animation-duration:3.04s"/>
+        <circle class="star" cx="760.2" cy="259.3" r="1.8" fill="#cfe6ff" opacity="0.48" style="animation-delay:3.96s;animation-duration:4.10s"/>
+        <circle class="star" cx="730.3" cy="34.0" r="2.1" fill="#cfe6ff" opacity="0.84" style="animation-delay:1.47s;animation-duration:4.05s"/>
+        <circle class="star" cx="99.4" cy="176.2" r="0.8" fill="#cfe6ff" opacity="0.57" style="animation-delay:0.18s;animation-duration:2.72s"/>
+        <circle class="star" cx="1024.6" cy="54.1" r="0.8" fill="#cfe6ff" opacity="0.59" style="animation-delay:1.75s;animation-duration:3.21s"/>
+        <circle class="star" cx="1070.3" cy="20.3" r="1.8" fill="#cfe6ff" opacity="0.72" style="animation-delay:1.86s;animation-duration:4.68s"/>
+        <circle class="star" cx="1158.4" cy="40.4" r="2.1" fill="#cfe6ff" opacity="0.40" style="animation-delay:3.85s;animation-duration:3.52s"/>
+        <circle class="star" cx="1075.6" cy="175.6" r="1.8" fill="#cfe6ff" opacity="0.65" style="animation-delay:1.20s;animation-duration:5.20s"/>
+        <circle class="star" cx="491.1" cy="351.1" r="2.1" fill="#cfe6ff" opacity="0.88" style="animation-delay:3.45s;animation-duration:5.03s"/>
+        <circle class="star" cx="421.3" cy="272.8" r="1.5" fill="#cfe6ff" opacity="0.77" style="animation-delay:2.85s;animation-duration:3.03s"/>
+        <circle class="star" cx="106.7" cy="186.2" r="1.2" fill="#cfe6ff" opacity="0.48" style="animation-delay:1.17s;animation-duration:3.95s"/>
+        <circle class="star" cx="109.5" cy="93.3" r="1.0" fill="#cfe6ff" opacity="0.71" style="animation-delay:2.34s;animation-duration:4.96s"/>
+        <circle class="star" cx="1121.3" cy="327.4" r="1.0" fill="#cfe6ff" opacity="0.79" style="animation-delay:3.38s;animation-duration:3.16s"/>
+        <circle class="star" cx="756.4" cy="250.5" r="1.5" fill="#cfe6ff" opacity="0.90" style="animation-delay:2.95s;animation-duration:4.13s"/>
+        <circle class="star" cx="48.9" cy="51.5" r="1.5" fill="#cfe6ff" opacity="0.62" style="animation-delay:0.76s;animation-duration:2.53s"/>
+        <circle class="star" cx="574.2" cy="168.5" r="0.8" fill="#cfe6ff" opacity="0.42" style="animation-delay:2.37s;animation-duration:4.62s"/>
+        <circle class="star" cx="738.4" cy="62.5" r="2.1" fill="#cfe6ff" opacity="0.68" style="animation-delay:0.91s;animation-duration:4.98s"/>
+        <circle class="star" cx="327.1" cy="209.3" r="1.8" fill="#cfe6ff" opacity="0.66" style="animation-delay:0.06s;animation-duration:4.56s"/>
+        <circle class="star" cx="226.7" cy="377.5" r="2.1" fill="#cfe6ff" opacity="0.46" style="animation-delay:3.21s;animation-duration:3.13s"/>
+        <circle class="star" cx="294.6" cy="94.1" r="1.0" fill="#cfe6ff" opacity="0.56" style="animation-delay:0.92s;animation-duration:3.82s"/>
+        <circle class="star" cx="1089.0" cy="210.5" r="1.0" fill="#cfe6ff" opacity="0.73" style="animation-delay:3.49s;animation-duration:2.51s"/>
+        <circle class="star" cx="924.2" cy="308.0" r="1.8" fill="#cfe6ff" opacity="0.41" style="animation-delay:0.46s;animation-duration:3.91s"/>
+        <circle class="star" cx="700.1" cy="160.5" r="2.1" fill="#cfe6ff" opacity="0.69" style="animation-delay:3.18s;animation-duration:2.80s"/>
+        <circle class="star" cx="668.4" cy="17.3" r="1.8" fill="#cfe6ff" opacity="0.45" style="animation-delay:0.80s;animation-duration:3.70s"/>
+        <circle class="star" cx="897.7" cy="334.8" r="1.8" fill="#cfe6ff" opacity="0.56" style="animation-delay:1.24s;animation-duration:3.92s"/>
+        <circle class="star" cx="219.3" cy="252.9" r="1.5" fill="#cfe6ff" opacity="0.95" style="animation-delay:1.39s;animation-duration:2.61s"/>
+        <circle class="star" cx="343.0" cy="377.4" r="2.1" fill="#cfe6ff" opacity="0.56" style="animation-delay:3.70s;animation-duration:4.42s"/>
+        <circle class="star" cx="1054.7" cy="275.9" r="1.5" fill="#cfe6ff" opacity="0.40" style="animation-delay:1.94s;animation-duration:3.33s"/>
+        <circle class="star" cx="177.1" cy="263.3" r="1.2" fill="#cfe6ff" opacity="0.71" style="animation-delay:2.18s;animation-duration:2.79s"/>
+        <circle class="star" cx="423.9" cy="66.1" r="1.8" fill="#cfe6ff" opacity="0.60" style="animation-delay:3.47s;animation-duration:2.90s"/>
+        <circle class="star" cx="845.5" cy="136.1" r="0.8" fill="#cfe6ff" opacity="0.78" style="animation-delay:2.88s;animation-duration:5.11s"/>
+        <circle class="star" cx="202.4" cy="225.8" r="1.0" fill="#cfe6ff" opacity="0.38" style="animation-delay:0.69s;animation-duration:4.88s"/>
+        <circle class="star" cx="549.2" cy="209.9" r="2.1" fill="#cfe6ff" opacity="0.86" style="animation-delay:1.51s;animation-duration:2.98s"/>
+        <circle class="star" cx="632.8" cy="129.8" r="1.0" fill="#cfe6ff" opacity="0.45" style="animation-delay:1.15s;animation-duration:4.30s"/>
+        <circle class="star" cx="988.2" cy="227.1" r="1.5" fill="#cfe6ff" opacity="0.61" style="animation-delay:1.20s;animation-duration:4.04s"/>
+        <circle class="star" cx="950.2" cy="253.9" r="1.8" fill="#cfe6ff" opacity="0.55" style="animation-delay:1.01s;animation-duration:4.82s"/>
+        <circle class="star" cx="66.7" cy="55.2" r="1.5" fill="#cfe6ff" opacity="0.92" style="animation-delay:0.58s;animation-duration:5.07s"/>
+        <circle class="star" cx="494.6" cy="140.4" r="1.2" fill="#cfe6ff" opacity="0.89" style="animation-delay:2.42s;animation-duration:2.40s"/>
+        <circle class="star" cx="1061.3" cy="54.9" r="1.8" fill="#cfe6ff" opacity="0.79" style="animation-delay:0.42s;animation-duration:2.81s"/>
+        <circle class="star" cx="957.0" cy="159.6" r="1.5" fill="#cfe6ff" opacity="0.54" style="animation-delay:1.33s;animation-duration:5.16s"/>
+        <circle class="star" cx="948.1" cy="117.9" r="2.1" fill="#cfe6ff" opacity="0.65" style="animation-delay:2.96s;animation-duration:2.83s"/>
+        <circle class="star" cx="1037.5" cy="67.9" r="1.0" fill="#cfe6ff" opacity="0.56" style="animation-delay:2.51s;animation-duration:3.21s"/>
+        <circle class="star" cx="583.9" cy="252.9" r="2.1" fill="#cfe6ff" opacity="0.42" style="animation-delay:3.91s;animation-duration:4.38s"/>
+        <circle class="star" cx="628.0" cy="305.6" r="1.5" fill="#cfe6ff" opacity="0.42" style="animation-delay:0.68s;animation-duration:4.47s"/>
+        <circle class="star" cx="1171.8" cy="383.2" r="1.5" fill="#cfe6ff" opacity="0.63" style="animation-delay:2.50s;animation-duration:3.06s"/>
+        <circle class="star" cx="774.2" cy="211.2" r="2.1" fill="#cfe6ff" opacity="0.42" style="animation-delay:0.50s;animation-duration:3.26s"/>
+        <circle class="star" cx="326.8" cy="133.3" r="1.2" fill="#cfe6ff" opacity="0.95" style="animation-delay:3.56s;animation-duration:4.10s"/>
+        <circle class="star" cx="423.3" cy="352.1" r="1.5" fill="#cfe6ff" opacity="0.44" style="animation-delay:0.37s;animation-duration:4.70s"/>
+        <circle class="star" cx="800.8" cy="267.3" r="0.8" fill="#cfe6ff" opacity="0.54" style="animation-delay:0.61s;animation-duration:3.68s"/>
+        <circle class="star" cx="129.0" cy="334.8" r="2.1" fill="#cfe6ff" opacity="0.66" style="animation-delay:1.51s;animation-duration:4.61s"/>
+        <circle class="star" cx="678.6" cy="29.1" r="1.5" fill="#cfe6ff" opacity="0.53" style="animation-delay:0.81s;animation-duration:4.77s"/>
+        <circle class="star" cx="333.5" cy="39.0" r="1.0" fill="#cfe6ff" opacity="0.49" style="animation-delay:3.37s;animation-duration:4.21s"/>
+        <circle class="star" cx="1083.9" cy="162.9" r="0.8" fill="#cfe6ff" opacity="0.78" style="animation-delay:0.07s;animation-duration:4.97s"/>
+        <circle class="star" cx="1075.6" cy="81.6" r="1.5" fill="#cfe6ff" opacity="0.53" style="animation-delay:2.50s;animation-duration:4.76s"/>
+        <circle class="star" cx="777.8" cy="86.6" r="1.0" fill="#cfe6ff" opacity="0.50" style="animation-delay:3.25s;animation-duration:3.52s"/>
+        <circle class="star" cx="493.9" cy="172.3" r="0.8" fill="#cfe6ff" opacity="0.88" style="animation-delay:3.44s;animation-duration:4.09s"/>
+        <circle class="star" cx="656.8" cy="334.3" r="2.1" fill="#cfe6ff" opacity="0.52" style="animation-delay:4.00s;animation-duration:2.49s"/>
+        <circle class="star" cx="475.4" cy="111.8" r="1.2" fill="#cfe6ff" opacity="0.40" style="animation-delay:3.95s;animation-duration:5.13s"/>
+        <circle class="star" cx="354.0" cy="290.4" r="1.0" fill="#cfe6ff" opacity="0.94" style="animation-delay:2.13s;animation-duration:3.20s"/>
+        <circle class="star" cx="848.3" cy="325.0" r="1.5" fill="#cfe6ff" opacity="0.83" style="animation-delay:0.63s;animation-duration:3.80s"/>
+        <circle class="star" cx="157.3" cy="30.2" r="1.0" fill="#cfe6ff" opacity="0.59" style="animation-delay:3.51s;animation-duration:2.93s"/>
+        <circle class="star" cx="1041.3" cy="342.6" r="1.8" fill="#cfe6ff" opacity="0.48" style="animation-delay:2.81s;animation-duration:2.65s"/>
+        <circle class="star" cx="864.0" cy="371.5" r="2.1" fill="#cfe6ff" opacity="0.91" style="animation-delay:3.42s;animation-duration:4.25s"/>
+        <circle class="star" cx="802.3" cy="187.0" r="1.0" fill="#cfe6ff" opacity="0.52" style="animation-delay:1.93s;animation-duration:4.35s"/>
+        <circle class="star" cx="21.9" cy="141.2" r="0.8" fill="#cfe6ff" opacity="0.60" style="animation-delay:0.65s;animation-duration:5.14s"/>
+        <circle class="star" cx="616.8" cy="126.2" r="1.8" fill="#cfe6ff" opacity="0.88" style="animation-delay:1.64s;animation-duration:2.52s"/>
+        <circle class="star" cx="709.6" cy="288.2" r="1.2" fill="#cfe6ff" opacity="0.43" style="animation-delay:1.37s;animation-duration:2.48s"/>
+        <circle class="star" cx="1179.6" cy="289.3" r="0.8" fill="#cfe6ff" opacity="0.42" style="animation-delay:1.12s;animation-duration:4.73s"/>
+        <circle class="star" cx="481.7" cy="302.1" r="0.8" fill="#cfe6ff" opacity="0.92" style="animation-delay:3.50s;animation-duration:4.45s"/>
+        <circle class="star" cx="360.0" cy="305.4" r="1.5" fill="#cfe6ff" opacity="0.83" style="animation-delay:2.14s;animation-duration:4.00s"/>
+      </g>
+
+      <!-- 卫星过境轨道（虚线弧） -->
+      <path class="r-orbit" d="M 60 320 Q 600 40 1160 150" fill="none" stroke="rgba(148,197,255,.18)" stroke-width="1.5" stroke-dasharray="2 8"/>
+
+      <!-- 中国版图轮廓 -->
+      <path class="r-china" d="M757.5,448.4 L774.5,436.5 L785.6,439.5 L784.9,434.5 L798.0,431.2 L799.5,426.7 L805.3,431.2 L803.4,428.8 L810.5,423.7 L807.8,412.3 L815.0,408.5 L824.7,410.2 L840.0,384.4 L808.3,390.2 L805.6,380.9 L781.0,373.6 L773.4,355.6 L766.1,348.2 L749.7,344.5 L729.2,346.5 L722.6,350.6 L728.5,355.4 L715.5,369.2 L717.3,370.9 L705.3,375.9 L696.8,373.4 L687.5,386.6 L690.7,390.3 L711.2,387.9 L721.6,398.2 L702.2,398.8 L672.7,413.2 L660.0,410.5 L655.4,416.2 L659.6,421.4 L647.8,428.5 L624.7,431.0 L605.5,437.8 L573.2,429.3 L538.3,428.9 L530.8,416.6 L495.4,409.7 L496.8,397.8 L491.6,390.6 L472.8,383.3 L471.6,378.6 L464.3,379.0 L461.9,383.6 L454.2,386.3 L453.9,395.1 L434.2,393.9 L428.3,406.3 L430.6,409.6 L409.8,411.9 L413.8,414.1 L416.9,425.4 L411.8,434.3 L386.4,442.1 L382.1,447.5 L370.5,446.1 L360.0,454.9 L362.3,461.0 L370.6,461.9 L372.8,470.7 L367.8,472.9 L378.5,476.1 L380.7,482.7 L396.2,485.2 L397.3,492.0 L403.2,494.3 L400.4,499.6 L405.3,507.8 L398.1,508.3 L403.6,520.3 L419.5,527.9 L427.0,525.4 L457.4,544.4 L478.9,543.1 L480.7,549.8 L486.9,541.8 L500.0,543.6 L505.0,552.6 L516.4,551.9 L533.3,541.5 L543.9,545.7 L548.5,539.6 L556.4,547.1 L557.0,554.4 L556.4,560.3 L547.4,569.0 L547.2,575.4 L557.7,573.6 L557.8,581.0 L563.1,583.2 L560.4,589.5 L566.3,590.0 L568.3,594.5 L575.2,592.2 L576.0,596.4 L580.2,597.0 L579.5,586.7 L586.1,584.4 L590.1,586.9 L592.4,584.1 L597.4,586.5 L608.0,579.6 L619.8,584.1 L618.7,590.7 L623.9,593.5 L643.6,594.7 L643.9,604.3 L648.6,602.7 L646.0,597.8 L669.9,591.4 L673.1,584.7 L679.5,587.0 L695.1,583.1 L714.5,568.0 L713.9,565.0 L721.3,563.5 L718.3,562.1 L722.0,556.5 L719.0,554.4 L723.4,554.2 L730.6,542.9 L735.0,541.7 L734.9,534.5 L737.8,535.0 L739.0,528.8 L730.6,523.7 L739.0,523.4 L732.8,516.3 L737.8,516.6 L736.8,512.8 L729.8,507.7 L724.8,494.5 L716.2,489.2 L723.8,479.7 L742.1,474.3 L743.5,470.4 L728.1,467.0 L717.1,472.6 L714.3,465.0 L706.9,464.1 L704.0,459.3 L714.0,457.0 L731.1,443.4 L740.0,446.4 L731.9,453.6 L735.8,455.1 L731.2,460.1 L757.5,448.4 Z" fill="rgba(56,189,248,.05)" stroke="rgba(125,211,252,.45)" stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- 地基雷达站（西安） -->
       <g class="r-station">
-        <ellipse cx="118" cy="552" rx="88" ry="9" fill="rgba(56,189,248,.12)"/>
-        <rect x="70" y="522" width="96" height="18" rx="4" fill="rgba(56,189,248,.18)"/>
-        <rect x="111" y="436" width="14" height="92" rx="4" fill="rgba(56,189,248,.3)"/>
-        <path d="M62 450 Q118 394 174 450 Z" fill="url(#dishGrad)" stroke="rgba(148,216,255,.85)" stroke-width="2.5"/>
-        <line x1="118" y1="436" x2="118" y2="404" stroke="rgba(148,216,255,.95)" stroke-width="3"/>
-        <circle cx="118" cy="399" r="5" fill="#7dd3fc"/>
-        <circle cx="118" cy="399" r="10" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="1"/>
+        <circle cx="636" cy="495" r="26" fill="url(#siteGlow)"/>
+        <rect x="625" y="491" width="22" height="10" rx="2.5" fill="rgba(148,216,255,.75)"/>
+        <rect x="633" y="473" width="6" height="20" rx="2" fill="rgba(148,216,255,.7)"/>
+        <path d="M 619 473 Q 636 455 653 473 Z" fill="rgba(125,211,252,.4)" stroke="rgba(190,233,255,.9)" stroke-width="1.8"/>
+        <line x1="636" y1="473" x2="636" y2="465" stroke="rgba(190,233,255,.95)" stroke-width="2"/>
+        <circle cx="636" cy="462" r="3" fill="#e6f7ff"/>
       </g>
-      <!-- 旋转扫描波束 -->
-      <g class="r-sweep">
-        <path d="M118 399 L 580 30 L 440 200 Z" fill="url(#beamGrad)"/>
-      </g>
-      <!-- 脉冲扩展波环 -->
+      <!-- 雷达脉冲环 -->
       <g class="r-arcs">
-        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="2" class="r-arc"/>
-        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="2" class="r-arc" style="animation-delay:.9s"/>
-        <circle cx="118" cy="399" r="24" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="2" class="r-arc" style="animation-delay:1.8s"/>
+        <circle cx="636" cy="495" r="12" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="1.6" class="r-arc"/>
+        <circle cx="636" cy="495" r="12" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="1.6" class="r-arc" style="animation-delay:.8s"/>
+        <circle cx="636" cy="495" r="12" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.6" class="r-arc" style="animation-delay:1.6s"/>
       </g>
-      <!-- 指向卫星的电磁波 -->
-      <path class="r-beam" d="M118 403 C 300 330 520 260 804 150" fill="none" stroke="rgba(125,211,252,.6)" stroke-width="2" stroke-dasharray="3 9"/>
-      <path class="r-wave" d="M118 403 C 300 330 520 260 804 150" fill="none" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 46"/>
+
+      <!-- 定向跟踪波束（指向卫星） -->
+      <path class="r-beamcone" d="M 643.5 500.0 L 885.3 134.2 L 878.7 129.8 L 628.5 490.0 Z" fill="url(#beamGrad)"/>
+      <path class="r-axis" d="M 636 495 L 882 132" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.5" stroke-dasharray="3 8"/>
+      <path class="r-wave" d="M 636 495 L 882 132" fill="none" stroke="#7dd3fc" stroke-width="2.2" stroke-dasharray="14 42"/>
+
       <!-- 卫星（缓慢漂移 + 浮动） -->
       <g class="r-sat-drift">
         <g class="r-sat">
-          <rect x="788" y="136" width="38" height="24" rx="5" fill="rgba(148,197,255,.5)" stroke="rgba(125,211,252,.85)" stroke-width="1.5"/>
-          <rect x="826" y="142" width="30" height="7" rx="2" fill="rgba(125,211,252,.65)"/>
-          <rect x="760" y="142" width="30" height="7" rx="2" fill="rgba(125,211,252,.65)"/>
-          <circle cx="800" cy="148" r="3.5" fill="#7dd3fc"/>
-          <line x1="807" y1="160" x2="830" y2="186" stroke="rgba(125,211,252,.7)" stroke-width="1.5"/>
-          <line x1="807" y1="160" x2="784" y2="186" stroke="rgba(125,211,252,.7)" stroke-width="1.5"/>
+          <rect x="858" y="120" width="40" height="26" rx="5" fill="rgba(148,197,255,.55)" stroke="rgba(190,233,255,.95)" stroke-width="1.6"/>
+          <rect x="898" y="126" width="32" height="8" rx="2" fill="rgba(125,211,252,.75)"/>
+          <rect x="826" y="126" width="32" height="8" rx="2" fill="rgba(125,211,252,.75)"/>
+          <circle cx="872" cy="133" r="4" fill="#e6f7ff"/>
+          <line x1="878" y1="146" x2="902" y2="172" stroke="rgba(125,211,252,.8)" stroke-width="1.6"/>
+          <line x1="878" y1="146" x2="854" y2="172" stroke="rgba(125,211,252,.8)" stroke-width="1.6"/>
+          <circle cx="902" cy="174" r="2.4" fill="#7dd3fc"/>
+          <circle cx="854" cy="174" r="2.4" fill="#7dd3fc"/>
         </g>
       </g>
     </svg>
   </div>
-</div>
 
 <!-- ======================= 导航 Nav ======================= -->
 <header class="nav" id="nav">
@@ -571,9 +654,7 @@
       <div class="honor-grid">
         <div class="honor-card hl">
           <div class="hc-icon">📋</div>
-          <div><b>连续两年年度考核优秀（2024 · 2025）</b><br><em>Annual performance review rated “Excellent” for two consecutive years</em>
-            <span class="hl-chips"><span>2024 优秀</span><span>2025 优秀</span></span>
-          </div>
+          <div><b>连续两年年度考核优秀（2024–2025）</b><br><em>Annual performance review rated “Excellent” for two consecutive years</em></div>
         </div>
         <div class="honor-card">
           <div class="hc-icon">🎓</div>
