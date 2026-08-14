@@ -120,55 +120,61 @@
     <div class="moon"></div>
   </div>
 
-  <!-- 三维地球（太空视角，下半部入画） -->
+  <!-- 三维地球（真实纹理，自转，太空视角） -->
   <div class="bg-globe">
-    <div class="globe">
-      <div class="globe-lines"></div>
-      <div class="globe-land"></div>
-      <div class="globe-cloud"></div>
-    </div>
+    <div class="globe"><div class="globe-shade"></div></div>
   </div>
 
-  <!-- 地基雷达站（立在版图中央/西安） -->
-  <div class="bg-radar" style="left:54%;">
-    <svg viewBox="0 0 220 240" width="150" height="164">
-      <g class="r-arcs">
-        <circle cx="110" cy="214" r="14" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="1.8" class="r-arc"/>
-        <circle cx="110" cy="214" r="14" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="1.8" class="r-arc" style="animation-delay:.8s"/>
-        <circle cx="110" cy="214" r="14" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.8" class="r-arc" style="animation-delay:1.6s"/>
-      </g>
-      <rect x="88" y="196" width="44" height="20" rx="4" fill="rgba(148,216,255,.75)"/>
-      <rect x="106" y="130" width="8" height="70" rx="3" fill="rgba(148,216,255,.75)"/>
-      <path d="M 78 132 Q 110 96 142 132 Z" fill="rgba(125,211,252,.45)" stroke="rgba(190,233,255,.95)" stroke-width="2"/>
-      <line x1="110" y1="130" x2="110" y2="112" stroke="rgba(190,233,255,1)" stroke-width="2.4"/>
-      <circle cx="110" cy="108" r="4" fill="#e6f7ff"/>
-    </svg>
-  </div>
-
-  <!-- 定向跟踪波束 + 卫星（过境扫描：波束绕雷达旋转，卫星始终在波束顶端） -->
-  <div class="bg-beam" style="left:54%;">
-    <svg viewBox="0 0 70 520" preserveAspectRatio="none">
+  <!-- 轨道 + 雷达站 + 跟踪波束 + 卫星（合成 SVG，波束从雷达顶部打出并实时锁定轨道上的卫星） -->
+  <div class="bg-track">
+    <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice">
       <defs>
-        <linearGradient id="beamV" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0" stop-color="rgba(56,189,248,.55)"/>
-          <stop offset=".35" stop-color="rgba(56,189,248,.2)"/>
+        <linearGradient id="beamGrad" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="rgba(56,189,248,.5)"/>
+          <stop offset=".3" stop-color="rgba(56,189,248,.16)"/>
           <stop offset="1" stop-color="rgba(56,189,248,0)"/>
         </linearGradient>
       </defs>
-      <path d="M 35 500 L 6 20 L 64 20 Z" fill="url(#beamV)"/>
-      <line x1="35" y1="500" x2="35" y2="16" stroke="rgba(148,216,255,.6)" stroke-width="1.8" stroke-dasharray="3 10" class="r-axis"/>
-      <line x1="35" y1="500" x2="35" y2="16" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 52" class="r-wave"/>
-      <!-- 卫星：挂在波束顶端，过境时沿波束进出（进站-过顶-出站） -->
-      <g class="r-sat-track">
-        <g class="r-sat">
-          <rect x="27" y="0" width="16" height="20" rx="4" fill="rgba(148,197,255,.65)" stroke="rgba(190,233,255,1)" stroke-width="1.5"/>
-          <rect x="43" y="4" width="12" height="6" rx="2" fill="rgba(125,211,252,.9)"/>
-          <rect x="15" y="4" width="12" height="6" rx="2" fill="rgba(125,211,252,.9)"/>
-          <circle cx="31" cy="10" r="3" fill="#e6f7ff"/>
-          <line x1="35" y1="20" x2="49" y2="36" stroke="rgba(125,211,252,.95)" stroke-width="1.6"/>
-          <line x1="35" y1="20" x2="21" y2="36" stroke="rgba(125,211,252,.95)" stroke-width="1.6"/>
-          <circle cx="50" cy="38" r="2" fill="#7dd3fc"/>
-          <circle cx="20" cy="38" r="2" fill="#7dd3fc"/>
+
+      <!-- 卫星轨道（虚线弧：进站→过顶→出站） -->
+      <path class="orbit" d="M 60 620 Q 600 40 1140 600" fill="none" stroke="rgba(148,197,255,.22)"
+            stroke-width="1.8" stroke-dasharray="3 10"/>
+
+      <!-- 雷达站（碗口朝上，馈源即波束发射点） -->
+      <g class="r-station">
+        <rect x="556" y="488" width="88" height="16" rx="4" fill="rgba(148,216,255,.6)"/>
+        <rect x="594" y="420" width="12" height="72" rx="4" fill="rgba(148,216,255,.6)"/>
+        <path d="M 546 402 Q 600 438 654 402 Z" fill="rgba(125,211,252,.4)" stroke="rgba(190,233,255,.9)" stroke-width="2"/>
+        <line x1="600" y1="402" x2="600" y2="452" stroke="rgba(190,233,255,.95)" stroke-width="2.2"/>
+        <circle cx="600" cy="452" r="4.2" fill="#e6f7ff"/>
+        <g class="r-arcs">
+          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.9)" stroke-width="1.8" class="r-arc"/>
+          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.7)" stroke-width="1.8" class="r-arc" style="animation-delay:.8s"/>
+          <circle cx="600" cy="470" r="16" fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.8" class="r-arc" style="animation-delay:1.6s"/>
+        </g>
+      </g>
+
+      <!-- 跟踪波束：从馈源点向上打出，由 JS 实时旋转锁定卫星 -->
+      <g transform="translate(600,452)">
+        <g id="beamGroup">
+          <path d="M -16 0 L -6 -560 L 6 -560 L 16 0 Z" fill="url(#beamGrad)"/>
+          <line x1="0" y1="0" x2="0" y2="-560" stroke="rgba(148,216,255,.55)" stroke-width="2" stroke-dasharray="3 10" class="r-axis"/>
+          <line x1="0" y1="0" x2="0" y2="-560" stroke="#7dd3fc" stroke-width="2.4" stroke-dasharray="16 52" class="r-wave"/>
+        </g>
+      </g>
+
+      <!-- 卫星：沿轨道飞行（SMIL 动画），姿态随轨道自动倾斜 -->
+      <g class="r-sat">
+        <g>
+          <animateMotion dur="40s" repeatCount="indefinite" path="M 60 620 Q 600 40 1140 600" rotate="auto"/>
+          <rect x="-10" y="-13" width="20" height="26" rx="5" fill="rgba(148,197,255,.7)" stroke="rgba(190,233,255,1)" stroke-width="1.5"/>
+          <rect x="10" y="-8" width="14" height="7" rx="2" fill="rgba(125,211,252,.95)"/>
+          <rect x="-24" y="-8" width="14" height="7" rx="2" fill="rgba(125,211,252,.95)"/>
+          <circle cx="0" cy="0" r="4" fill="#e6f7ff"/>
+          <line x1="0" y1="13" x2="13" y2="30" stroke="rgba(125,211,252,.95)" stroke-width="1.8"/>
+          <line x1="0" y1="13" x2="-13" y2="30" stroke="rgba(125,211,252,.95)" stroke-width="1.8"/>
+          <circle cx="15" cy="32" r="2.4" fill="#7dd3fc"/>
+          <circle cx="-15" cy="32" r="2.4" fill="#7dd3fc"/>
         </g>
       </g>
     </svg>
@@ -718,35 +724,54 @@
       <h2><span class="zh">联系方式</span> <span class="en">Contact</span></h2>
       <div class="line"></div>
     </div>
-    <div class="contact-grid">
-      <a class="contact-card" href="mailto:lixiaoyong@xidian.edu.cn">
-        <div class="cc-icon">✉️</div>
-        <div><b>邮箱 Email</b><br><span>lixiaoyong@xidian.edu.cn</span></div>
-      </a>
-      <a class="contact-card" href="https://orcid.org/0000-0002-6580-1648" target="_blank" rel="noopener">
-        <div class="cc-icon">🆔</div>
-        <div><b>ORCID</b><br><span>0000-0002-6580-1648</span></div>
-      </a>
-      <a class="contact-card" href="https://scholar.google.com/citations?user=v3j2-6QAAAAJ" target="_blank" rel="noopener">
-        <div class="cc-icon">🎓</div>
-        <div><b>Google Scholar</b><br><span>117 被引 · h-index 6</span></div>
-      </a>
-      <a class="contact-card" href="https://sciprofiles.com/profile/lixyxd" target="_blank" rel="noopener">
-        <div class="cc-icon">🧑‍🔬</div>
-        <div><b>SciProfiles</b><br><span>sciprofiles.com/profile/lixyxd</span></div>
-      </a>
-      <a class="contact-card" href="https://ieeexplore.ieee.org/author/37089716785" target="_blank" rel="noopener">
-        <div class="cc-icon">📡</div>
-        <div><b>IEEE Xplore</b><br><span>Author ID 37089716785</span></div>
-      </a>
-      <a class="contact-card" href="https://hz.xidian.edu.cn/info/1267/9514.htm" target="_blank" rel="noopener">
-        <div class="cc-icon">🏫</div>
-        <div><b>西电杭州研究院主页</b><br><span>hz.xidian.edu.cn</span></div>
-      </a>
-      <a class="contact-card" href="https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm" target="_blank" rel="noopener">
-        <div class="cc-icon">👨‍🏫</div>
-        <div><b>西电教师主页</b><br><span>faculty.xidian.edu.cn</span></div>
-      </a>
+    <div class="contact-groups">
+      <div class="contact-group">
+        <h3>✉️ 直接联系 · Direct Contact</h3>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:lixiaoyong@xidian.edu.cn">
+            <div class="cc-icon">✉️</div>
+            <div><b>邮箱 Email</b><br><span>lixiaoyong@xidian.edu.cn</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-group">
+        <h3>🎓 学术档案 · Academic Profiles</h3>
+        <div class="contact-grid">
+          <a class="contact-card" href="https://orcid.org/0000-0002-6580-1648" target="_blank" rel="noopener">
+            <div class="cc-icon">🆔</div>
+            <div><b>ORCID</b><br><span>0000-0002-6580-1648</span></div>
+          </a>
+          <a class="contact-card" href="https://scholar.google.com/citations?user=v3j2-6QAAAAJ" target="_blank" rel="noopener">
+            <div class="cc-icon">🎓</div>
+            <div><b>Google Scholar</b><br><span>117 被引 · h-index 6</span></div>
+          </a>
+          <a class="contact-card" href="https://sciprofiles.com/profile/lixyxd" target="_blank" rel="noopener">
+            <div class="cc-icon">🧑‍🔬</div>
+            <div><b>SciProfiles</b><br><span>sciprofiles.com/profile/lixyxd</span></div>
+          </a>
+          <a class="contact-card" href="https://ieeexplore.ieee.org/author/37089716785" target="_blank" rel="noopener">
+            <div class="cc-icon">📡</div>
+            <div><b>IEEE Xplore</b><br><span>Author ID 37089716785</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-group">
+        <h3>🏫 单位主页 · Institution</h3>
+        <div class="contact-grid">
+          <a class="contact-card" href="https://hz.xidian.edu.cn/info/1267/9514.htm" target="_blank" rel="noopener">
+            <div class="cc-icon">🏫</div>
+            <div><b>西电杭州研究院主页</b><br><span>hz.xidian.edu.cn</span></div>
+          </a>
+          <a class="contact-card" href="https://faculty.xidian.edu.cn/LIXIAOYONG/zh_CN/index.htm" target="_blank" rel="noopener">
+            <div class="cc-icon">👨‍🏫</div>
+            <div><b>西电教师主页</b><br><span>faculty.xidian.edu.cn</span></div>
+          </a>
+          <a class="contact-card" href="https://github.com/lixyxd" target="_blank" rel="noopener">
+            <div class="cc-icon">🐙</div>
+            <div><b>GitHub</b><br><span>github.com/lixyxd</span></div>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

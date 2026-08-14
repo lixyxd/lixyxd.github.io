@@ -49,7 +49,7 @@ em{font-style:normal;}
 @keyframes orb-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(28px,-34px);}}
 .bg-vignette{position:absolute; inset:0; background:radial-gradient(ellipse 130% 90% at 50% -10%, transparent 42%, rgba(4,8,18,.55) 100%);}
 
-/* ---------- background: starry sky + 3D Earth + radar tracking satellite ---------- */
+/* ---------- background: starry sky + rotating textured Earth + orbital radar tracking ---------- */
 .bg-sky{position:absolute; inset:0 0 42% 0; overflow:hidden;}
 .starfield{position:absolute; inset:0; width:100%; height:100%; display:block;}
 .star{animation:twinkle 3.8s ease-in-out infinite;}
@@ -59,52 +59,33 @@ em{font-style:normal;}
   box-shadow:0 0 42px 12px rgba(253,246,216,.32); opacity:.75; animation:moon-glow 7s ease-in-out infinite;}
 @keyframes moon-glow{0%,100%{box-shadow:0 0 42px 12px rgba(253,246,216,.28);} 50%{box-shadow:0 0 58px 18px rgba(253,246,216,.44);}}
 
-/* 3D Earth globe (bottom, seen from space) */
-.bg-globe{position:absolute; left:50%; bottom:-34%; width:min(66vw, 680px); aspect-ratio:1/1;
-  transform:translateX(-50%); z-index:0; filter:drop-shadow(0 0 36px rgba(56,189,248,.3));}
+/* rotating Earth with real texture (2:1 equirectangular wrapped on a sphere) */
+.bg-globe{position:absolute; left:50%; bottom:-36%; width:min(68vw,700px); aspect-ratio:1/1;
+  transform:translateX(-50%); z-index:0; filter:drop-shadow(0 0 40px rgba(56,189,248,.32));}
 .globe{position:relative; width:100%; height:100%; border-radius:50%; overflow:hidden;
-  background:radial-gradient(circle at 34% 30%, #3d8bc7 0%, #1e5a9e 40%, #0e2f5e 68%, #051530 100%);
-  box-shadow:inset -34px -26px 70px rgba(0,8,26,.92), inset 12px 10px 46px rgba(140,200,255,.16);}
-.globe-lines{position:absolute; inset:-22%; border-radius:50%;
-  background:repeating-linear-gradient(90deg, transparent 0 34px, rgba(125,211,252,.13) 34px 36px);
-  animation:globe-spin 48s linear infinite;}
-.globe-land{position:absolute; inset:0; border-radius:50%;
+  background-image:url(../img/earth.jpg);
+  background-size:200% 100%; background-repeat:repeat-x; background-position:0 0;
+  animation:earth-rotate 70s linear infinite;
+  box-shadow:inset -42px -32px 88px rgba(0,8,26,.88), inset 18px 14px 55px rgba(140,200,255,.15);}
+@keyframes earth-rotate{from{background-position:0 0;} to{background-position:200% 0;}}
+.globe-shade{position:absolute; inset:0; border-radius:50%;
   background:
-    radial-gradient(36% 30% at 30% 42%, rgba(86,180,122,.26), transparent 70%),
-    radial-gradient(30% 26% at 68% 34%, rgba(126,202,130,.18), transparent 70%),
-    radial-gradient(24% 20% at 56% 62%, rgba(112,192,132,.16), transparent 70%);
-  animation:globe-spin 96s linear infinite reverse;}
-.globe-cloud{position:absolute; inset:0; border-radius:50%;
-  background:
-    radial-gradient(28% 20% at 42% 30%, rgba(220,235,250,.12), transparent 70%),
-    radial-gradient(22% 16% at 70% 58%, rgba(220,235,250,.1), transparent 70%);
-  animation:globe-spin 64s linear infinite;}
-.globe::after{content:""; position:absolute; inset:0; border-radius:50%;
-  background:radial-gradient(circle at 34% 30%, rgba(150,215,255,.18), transparent 56%);}
-@keyframes globe-spin{to{transform:rotate(360deg);}}
+    radial-gradient(circle at 32% 26%, rgba(255,255,255,.18), rgba(255,255,255,0) 44%),
+    radial-gradient(circle at 68% 82%, rgba(0,6,20,.5), rgba(0,0,0,0) 58%),
+    radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,4,14,.45) 86%, rgba(0,3,12,.82) 100%);}
 
-/* radar station standing on the globe surface */
-.bg-radar{position:absolute; left:50%; bottom:11%; transform:translateX(-50%); z-index:2;
-  filter:drop-shadow(0 4px 14px rgba(56,189,248,.45));}
-.bg-radar svg{display:block;}
+/* unified track scene: orbit + radar station + tracking beam + satellite */
+.bg-track{position:absolute; inset:0; z-index:1; pointer-events:none;}
+.bg-track svg{width:100%; height:100%; display:block;}
+.orbit{opacity:.85; animation:orbit-pulse 6s ease-in-out infinite;}
+@keyframes orbit-pulse{0%,100%{opacity:.5;} 50%{opacity:1;}}
 .r-arcs .r-arc{transform-box:fill-box; transform-origin:center; animation:arc-pulse 3s ease-out infinite;}
 @keyframes arc-pulse{0%{transform:scale(.4); opacity:.95;} 100%{transform:scale(3.6); opacity:0;}}
-
-/* directional tracking beam: rotates around the radar (satellite pass),
-   satellite rides at the beam tip so beam always connects radar -> satellite */
-.bg-beam{position:absolute; left:50%; bottom:13%; width:72px; height:60vh;
-  transform:translateX(-50%) rotate(-52deg); transform-origin:50% 100%; z-index:1; opacity:.9;
-  animation:beam-pass 46s ease-in-out infinite alternate;}
-@keyframes beam-pass{from{transform:translateX(-50%) rotate(-52deg);} to{transform:translateX(-50%) rotate(52deg);}}
-.bg-beam svg{width:100%; height:100%; display:block;}
 .r-axis{animation:axis-dash 1.6s linear infinite;}
 @keyframes axis-dash{to{stroke-dashoffset:-130;}}
 .r-wave{animation:wave-dash 2.1s linear infinite;}
 @keyframes wave-dash{to{stroke-dashoffset:-170;}}
-.r-sat-track{animation:sat-track 9s ease-in-out infinite alternate;}
-@keyframes sat-track{from{transform:translateY(22px);} to{transform:translateY(118px);}}
-.r-sat{filter:drop-shadow(0 0 10px rgba(125,211,252,.6)); animation:sat-bob 4.6s ease-in-out infinite;}
-@keyframes sat-bob{0%,100%{transform:translate(0,0);} 50%{transform:translate(2.5px,-4px);}}
+.r-sat{filter:drop-shadow(0 0 12px rgba(125,211,252,.65));}
 
 /* horizon blend + bottom fade (keeps content readable) */
 .bg-horizon{position:absolute; left:0; right:0; bottom:0; height:30vh; pointer-events:none;
@@ -313,6 +294,10 @@ em{font-style:normal;}
 .news-links a:hover{background:rgba(56,189,248,.12); text-decoration:none; transform:translateY(-1px);}
 
 /* contact */
+.contact-groups{display:flex; flex-direction:column; gap:20px;}
+.contact-group h3{font-size:13.5px; color:var(--sky); letter-spacing:1px; margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;}
+.contact-group h3::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, var(--line-strong), transparent);}
 .contact-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px;}
 .contact-card{display:flex; gap:13px; align-items:center; background:rgba(15,26,48,.55); border:1px solid var(--line);
   border-radius:13px; padding:15px; color:var(--txt); transition:.2s; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);

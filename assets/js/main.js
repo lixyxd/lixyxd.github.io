@@ -141,4 +141,30 @@
       counters.forEach(animate);
     }
   }
+
+  /* ---- orbital satellite pass: JS rotates the radar beam to lock onto the
+         satellite as it travels along the orbit (matches the SMIL animateMotion) ---- */
+  (function () {
+    var beam = document.getElementById('beamGroup');
+    var sat = document.querySelector('.bg-track .r-sat');
+    if (!beam || !sat || reduceMotion || typeof performance === 'undefined') return;
+    var P0 = { x: 60, y: 620 }, P1 = { x: 600, y: 40 }, P2 = { x: 1140, y: 600 };
+    var RX = 600, RY = 452, DUR = 40000; // must match animateMotion dur
+    var bez = function (t) {
+      var u = 1 - t;
+      return {
+        x: u * u * P0.x + 2 * u * t * P1.x + t * t * P2.x,
+        y: u * u * P0.y + 2 * u * t * P1.y + t * t * P2.y
+      };
+    };
+    var tick = function () {
+      var t = (performance.now() % DUR) / DUR;
+      var p = bez(t);
+      var dx = p.x - RX, dy = p.y - RY;
+      var deg = Math.atan2(dx, -dy) * 180 / Math.PI;
+      beam.setAttribute('transform', 'rotate(' + deg.toFixed(2) + ' 0 0)');
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  })();
 })();
