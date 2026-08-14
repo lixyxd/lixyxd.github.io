@@ -165,15 +165,15 @@ em{font-style:normal;}
   backdrop-filter:blur(14px) saturate(1.4); -webkit-backdrop-filter:blur(14px) saturate(1.4);
   border-bottom:1px solid var(--line);}
 .nav-inner{max-width:1080px; margin:0 auto; padding:0 22px; height:60px; display:flex; align-items:center; justify-content:space-between;}
-.brand{color:var(--txt); font-weight:700; font-size:16px; display:flex; align-items:center; gap:8px;}
+.brand{color:var(--txt); font-weight:700; font-size:17px; display:flex; align-items:center; gap:10px;}
 .brand:hover{text-decoration:none;}
-.brand-logo{flex:none; filter:drop-shadow(0 0 5px rgba(56,189,248,.55));}
+.brand-logo{flex:none; width:28px; height:28px; filter:drop-shadow(0 0 5px rgba(56,189,248,.55));}
 .brand .sweep{transform-box:view-box; transform-origin:center; animation:radar-sweep 3.2s linear infinite;}
 .brand .blip{animation:blip-pulse 2.4s ease-in-out infinite;}
 @keyframes radar-sweep{to{transform:rotate(360deg);}}
 @keyframes blip-pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
 .brand .brand-cn{background:var(--grad-main); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.brand em{color:var(--dim); font-size:12px; font-weight:400;}
+.brand em{color:var(--dim); font-size:13px; font-weight:400;}
 .links{display:flex; gap:6px;}
 .links a{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:104px; padding:5px 14px 6px; border-radius:10px; gap:2px;
