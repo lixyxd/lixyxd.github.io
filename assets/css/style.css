@@ -49,21 +49,48 @@ em{font-style:normal;}
 @keyframes orb-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(28px,-34px);}}
 .bg-vignette{position:absolute; inset:0; background:radial-gradient(ellipse 120% 80% at 50% -10%, transparent 40%, rgba(4,8,18,.7) 100%);}
 
-/* ---------- radar scene (starry sky + China map + ground radar tracking satellite) ---------- */
-.radar-scene{position:fixed; left:0; right:0; bottom:0; height:62vh; z-index:0; pointer-events:none; opacity:.9;}
-.radar-scene svg{width:100%; height:100%; display:block;}
-.star{animation:twinkle 3.6s ease-in-out infinite;}
-@keyframes twinkle{0%,100%{opacity:.25;} 50%{opacity:1;}}
-.r-orbit{opacity:.8;}
-.r-arc{transform-origin:636px 495px; animation:arc-pulse 3s ease-out infinite;}
-@keyframes arc-pulse{0%{transform:scale(.5); opacity:.95;} 100%{transform:scale(4.2); opacity:0;}}
-.r-wave{animation:wave-dash 2s linear infinite;}
+/* ---------- background: starry sky + 3D China ground + radar tracking satellite ---------- */
+.bg-sky{position:absolute; inset:0 0 42% 0; overflow:hidden;}
+.starfield{position:absolute; inset:0; animation:twinkle 4.5s ease-in-out infinite;}
+.sf-bright{animation-duration:3.2s;}
+@keyframes twinkle{0%,100%{opacity:.32;} 50%{opacity:1;}}
+.moon{position:absolute; right:16%; top:9%; width:74px; height:74px; border-radius:50%;
+  background:radial-gradient(circle at 38% 36%, #fdf6d8, #e8e0b8 55%, rgba(232,224,184,0) 72%);
+  box-shadow:0 0 42px 12px rgba(253,246,216,.32); opacity:.75; animation:moon-glow 7s ease-in-out infinite;}
+@keyframes moon-glow{0%,100%{box-shadow:0 0 42px 12px rgba(253,246,216,.28);} 50%{box-shadow:0 0 58px 18px rgba(253,246,216,.44);}}
+
+/* ground: China map lying on the ground with 3D perspective */
+.bg-ground{position:absolute; left:-8%; right:-8%; bottom:-8%; height:46vh; perspective:860px; overflow:hidden;}
+.china-plane{position:absolute; left:50%; bottom:-4%; width:min(880px,120%);
+  transform:translateX(-50%) rotateX(63deg); transform-origin:bottom center;
+  filter:drop-shadow(0 0 12px rgba(56,189,248,.28));}
+.china-plane svg{width:100%; display:block;}
+
+/* radar station standing on the map */
+.bg-radar{position:absolute; bottom:15%; transform:translateX(-50%); z-index:2;
+  filter:drop-shadow(0 4px 14px rgba(56,189,248,.45));}
+.bg-radar svg{display:block;}
+.r-arcs .r-arc{transform-box:fill-box; transform-origin:center; animation:arc-pulse 3s ease-out infinite;}
+@keyframes arc-pulse{0%{transform:scale(.4); opacity:.95;} 100%{transform:scale(3.6); opacity:0;}}
+
+/* directional tracking beam (radar -> satellite) */
+.bg-beam{position:absolute; bottom:15%; width:60px; height:58vh; transform:translateX(-50%) rotate(7deg);
+  transform-origin:bottom center; z-index:1; opacity:.85;}
+.bg-beam svg{width:100%; height:100%; display:block;}
+.r-axis{animation:axis-dash 1.6s linear infinite;}
+@keyframes axis-dash{to{stroke-dashoffset:-130;}}
+.r-wave{animation:wave-dash 2.1s linear infinite;}
 @keyframes wave-dash{to{stroke-dashoffset:-170;}}
-.r-china{filter:drop-shadow(0 0 6px rgba(56,189,248,.25));}
-.r-sat-drift{animation:sat-drift 34s ease-in-out infinite alternate;}
-@keyframes sat-drift{from{transform:translateX(0);} to{transform:translateX(-56px);}}
-.r-sat{animation:sat-float 6s ease-in-out infinite;}
-@keyframes sat-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(12px,-10px);}}
+
+/* satellite drifting across the sky */
+.bg-sat-drift{position:absolute; z-index:2; animation:sat-drift 36s ease-in-out infinite alternate;}
+@keyframes sat-drift{from{transform:translate(0,0);} to{transform:translate(-60px,18px);}}
+.bg-sat{animation:sat-float 6s ease-in-out infinite; filter:drop-shadow(0 0 12px rgba(125,211,252,.55));}
+@keyframes sat-float{0%,100%{transform:translate(0,0);} 50%{transform:translate(13px,-11px);}}
+
+/* horizon blend + bottom fade (keeps content readable) */
+.bg-horizon{position:absolute; left:0; right:0; bottom:0; height:46vh; pointer-events:none;
+  background:linear-gradient(180deg, rgba(7,13,28,0) 6%, rgba(7,13,28,.22) 38%, rgba(7,13,28,.6) 78%, rgba(7,13,28,.82) 100%);}
 
 /* highlight card (annual review) */
 .honor-card.hl{border-color:rgba(251,191,36,.5); box-shadow:0 0 0 1px rgba(251,191,36,.15), 0 12px 34px rgba(2,6,18,.5);}
