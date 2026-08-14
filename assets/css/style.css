@@ -222,21 +222,6 @@ em{font-style:normal;}
 .btn.primary:hover{filter:brightness(1.12); text-decoration:none; transform:translateY(-2px); box-shadow:0 10px 32px rgba(56,189,248,.45);}
 .btn.ghost{border:1px solid var(--line-strong); color:var(--txt); background:rgba(15,26,48,.4);}
 .btn.ghost:hover{border-color:var(--sky); color:var(--sky); text-decoration:none; transform:translateY(-2px); box-shadow:var(--glow-sky);}
-/* hero: representative works */
-.hero-works{margin-top:20px;}
-.hw-label{font-size:12px; color:var(--amber); letter-spacing:.5px; margin-bottom:8px;}
-.hw-list{display:flex; flex-direction:column; gap:8px;}
-.hw-item{display:flex; align-items:center; gap:12px; background:rgba(15,26,48,.55); border:1px solid var(--line);
-  border-radius:10px; padding:10px 14px; transition:.18s;}
-.hw-item:hover{border-color:rgba(56,189,248,.45); background:rgba(56,189,248,.08); transform:translateX(3px); text-decoration:none;}
-.hw-main{flex:1; min-width:0;}
-.hw-title{display:block; font-size:12.5px; color:var(--txt); line-height:1.4;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-.hw-item:hover .hw-title{color:var(--sky);}
-.hw-meta{display:block; font-size:11px; color:var(--faint); margin-top:2px;}
-.hw-go{flex:none; color:var(--faint); font-size:14px; transition:.18s;}
-.hw-item:hover .hw-go{color:var(--sky); transform:translateX(2px);}
-
 /* hero badges (icon pills) */
 .hero-badges{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;}
 .hero-badges a{font-size:12px; color:var(--dim); border:1px solid var(--line); border-radius:999px; padding:4px 12px;
