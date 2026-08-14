@@ -230,7 +230,7 @@ em{font-style:normal;}
 .hero-badges a:hover{color:var(--sky); border-color:rgba(56,189,248,.5); background:rgba(56,189,248,.08); text-decoration:none; transform:translateY(-1px);}
 
 /* ---------- sections ---------- */
-.sec{max-width:1080px; margin:0 auto; padding:50px 22px;}
+.sec{max-width:1080px; margin:0 auto; padding:50px 22px; scroll-margin-top:76px;}
 .sec-head{display:flex; align-items:center; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
 .sec-head h2{font-size:21.5px; letter-spacing:.5px;}
 .sec-head h2 .zh{background:var(--grad-main); -webkit-background-clip:text; background-clip:text; color:transparent;}
