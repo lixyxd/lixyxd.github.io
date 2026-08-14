@@ -50,7 +50,7 @@
   activateTab(tabFromHash(), false);
 
   /* ---- reveal on scroll (staggered) ---- */
-  var revealEls = document.querySelectorAll('.pub, .honor-card, .contact-card, .tl-item');
+  var revealEls = document.querySelectorAll('.pub, .honor-card, .tl-item');
   if (!reduceMotion && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
