@@ -14,23 +14,36 @@ Tenure-Track Associate Professor, Hangzhou Institute of Technology, Xidian Unive
 ├── index.html            # 主页（中英双语）
 ├── 404.html              # 404 页面
 ├── .nojekyll             # 禁用 Jekyll（纯静态站点）
-├── .github/
-│   └── workflows/
-│       └── pages.yml     # GitHub Actions 自动部署
 └── assets/
     ├── css/style.css     # 样式（深色科技风）
     ├── js/main.js        # 交互（导航 / 滚动显现 / 论文筛选）
     └── img/author_photo.jpg
 ```
 
-## 部署方法 / How to Deploy
+## 部署方式 / How It's Deployed
 
-1. 新建仓库 **`lixyxd.github.io`**（Public，仓库名必须与用户名一致 / repo name must match your username）；
-2. 将本目录所有文件推送到仓库 `main` 分支；
-3. 打开仓库 **Settings → Pages**，在 "Build and deployment" 中选择 **Source: GitHub Actions**（本仓库已自带 `pages.yml` 工作流，推送后会自动构建并部署）；
-4. 等待几分钟，访问 **https://lixyxd.github.io**。
+本站使用 **GitHub Pages 分支部署（Deploy from a branch）**，无需 Actions 工作流：
 
-> 如果推送后工作流没有运行，请到仓库 **Actions** 标签页手动触发 "Deploy to GitHub Pages"。
+- 部署源：`main` 分支根目录 `/`
+- **每次向 `main` 分支推送更新，网站都会自动重新构建并发布**，几分钟内生效
+- 相关设置位于：仓库 **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main / (root)**
+
+> 提示：首次启用时选过主题 `jekyll-theme-cayman`，但仓库内的 `.nojekyll` 文件会禁用 Jekyll 处理，因此实际以纯静态 HTML 呈现，`_config.yml` 不生效（保留无影响）。
+
+## 本地更新步骤 / How to Update
+
+```bash
+# 克隆仓库
+git clone https://github.com/lixyxd/lixyxd.github.io.git
+cd lixyxd.github.io
+
+# 修改 index.html / assets 后提交推送
+git add -A
+git commit -m "update homepage"
+git push origin main     # 推送后网站自动更新
+```
+
+不想用命令行的话，也可以直接在 GitHub 网页上编辑 `index.html`（打开文件 → 铅笔图标 → 修改 → Commit changes），同样会自动重新部署。
 
 ## 需要你补充的内容 / TODO
 
