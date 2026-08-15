@@ -502,7 +502,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .avatar-status{right:-4px; bottom:-4px;}
   .hero-stats{gap:26px;}
   .to-top,.to-bottom{right:16px;}
-  .ccat3{transform:scale(.72);}
+  .ccat{transform:scale(2);}
   .footer-inner{flex-direction:column; text-align:center; justify-content:center;}
   .fb-addr{justify-content:center; text-align:left;}
   /* mobile perf: drop expensive blur/grid/star animations */
@@ -513,16 +513,9 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .globe-day{display:none;}
 }
 
-/* corner cats (3D-style, cursor-following via corner-cats.js) */
-.ccat3{position:fixed; z-index:30; pointer-events:none; width:96px; height:96px;}
-.c3-bob{position:absolute; inset:0; animation:c3-bob 3.2s ease-in-out infinite;}
-.c3-sprite{position:absolute; inset:8px 4px 18px; background-size:contain; background-repeat:no-repeat;
-  background-position:center; transform-origin:center; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));}
-.c3-shadow{position:absolute; left:50%; bottom:2px; width:52px; height:14px; margin-left:-26px;
-  background:radial-gradient(ellipse, rgba(0,0,0,.38), transparent 70%);
-  animation:c3-shadow 3.2s ease-in-out infinite;}
-@keyframes c3-bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);}}
-@keyframes c3-shadow{0%,100%{transform:scale(1); opacity:.85;} 50%{transform:scale(.8); opacity:.45;}}
+/* corner cats (pixel art, cursor-following via corner-cats.js) */
+.ccat{position:fixed; z-index:30; pointer-events:none; image-rendering:pixelated;
+  transform:scale(3); filter:drop-shadow(0 6px 12px rgba(0,0,0,.45));}
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce){
