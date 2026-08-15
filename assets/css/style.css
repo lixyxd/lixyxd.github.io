@@ -257,7 +257,7 @@ em{font-style:normal;}
   background:rgba(56,189,248,.1); border-radius:999px; padding:5px 14px; transition:.18s;}
 .focus-chip:hover{border-color:rgba(56,189,248,.7); background:rgba(56,189,248,.16); transform:translateY(-1px);}
 .focus-chip em{font-style:normal; font-size:10.5px; color:var(--dim); font-weight:400; margin-left:5px; letter-spacing:.3px;}
-.hero-stats{display:flex; gap:30px; margin:12px 0 14px;}
+.hero-stats{display:flex; gap:48px; margin:12px 0 14px;}
 .stat{position:relative; padding-left:16px;}
 .stat::before{content:""; position:absolute; left:0; top:4px; bottom:4px; width:2px; border-radius:2px; background:var(--grad-main);}
 .stat b{display:block; font-size:27px; letter-spacing:.5px; line-height:1.15;
@@ -509,7 +509,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .focus-chip{font-size:13px; padding:3px 11px;}
   .avatar-wrap::before{inset:-11px;}
   .avatar-status{right:-4px; bottom:-4px;}
-  .hero-stats{gap:20px;}
+  .hero-stats{gap:26px;}
   .to-top,.to-bottom{right:16px;}
   .footer-inner{flex-direction:column; text-align:center; justify-content:center;}
   .fb-addr{justify-content:center; text-align:left;}
