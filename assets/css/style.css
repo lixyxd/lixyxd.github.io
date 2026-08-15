@@ -183,12 +183,12 @@ em{font-style:normal;}
 .brand .blip{animation:blip-pulse 2.4s ease-in-out infinite;}
 @keyframes radar-sweep{to{transform:rotate(360deg);}}
 @keyframes blip-pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
-.brand-info{display:flex; flex-direction:column; line-height:1.25;}
-.brand-info .bi-date{font-size:11px; color:var(--faint); font-weight:400; letter-spacing:.5px;}
-.brand-info .bi-lunar{font-size:10px; color:var(--dim); font-weight:400; letter-spacing:.5px;}
+.brand-info{display:flex; flex-direction:column; gap:1px; padding:4px 12px;
+  border:1px solid var(--line); border-radius:10px; background:rgba(56,189,248,.05); line-height:1.35;}
+.brand-info .bi-date{font-size:10.5px; color:var(--faint); font-weight:400; letter-spacing:.3px; white-space:nowrap;}
 .brand-info .bi-row{display:flex; align-items:baseline; gap:8px;}
-.brand-info .bi-time{font-size:17px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:.5px;}
-.brand-info .bi-weather{font-size:11.5px; color:var(--dim); font-weight:400;}
+.brand-info .bi-time{font-size:16px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:.5px;}
+.brand-info .bi-weather{font-size:11px; color:var(--dim); font-weight:400;}
 .links{display:flex; gap:6px;}
 .links a{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:104px; padding:5px 14px 6px; border-radius:10px; gap:2px;
@@ -489,6 +489,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
 /* responsive */
 @media (max-width:760px){
   .nav-toggle{display:block;}
+  .bi-date{display:none;}
   .bg-globe{width:170vw; bottom:-68vw;}
   .links{position:absolute; top:60px; left:0; right:0; background:rgba(28,48,90,.97); border-bottom:1px solid var(--line);
     flex-direction:column; padding:12px 22px 18px; gap:4px; display:none; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
