@@ -515,7 +515,9 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
 
 /* corner cats (pixel art, cursor-following via corner-cats.js) */
 .ccat{position:fixed; z-index:30; pointer-events:none; image-rendering:pixelated;
-  transform:scale(3); filter:sepia(1) hue-rotate(-18deg) saturate(2.1) drop-shadow(0 6px 12px rgba(0,0,0,.45));}
+  transform:scale(3);}
+#ccat-left{filter:sepia(1) hue-rotate(165deg) saturate(2) drop-shadow(0 6px 12px rgba(0,0,0,.45));}
+#ccat-right{filter:sepia(1) hue-rotate(280deg) saturate(1.8) brightness(1.1) drop-shadow(0 6px 12px rgba(0,0,0,.45));}
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce){
