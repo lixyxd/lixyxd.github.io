@@ -134,7 +134,7 @@
     };
   }
 
-  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue-v2.png', 48, function () {
+  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-orange-v3.png', 48, function () {
     return { x: mouseX, y: mouseY };
   });
   new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink-v2.png', 100, function () {
