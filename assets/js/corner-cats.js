@@ -1,11 +1,10 @@
 /* corner-cats.js — oneko-style pixel cats with mouse interaction.
-   Cat-left chases the cursor; cat-right chases cat-left.
-   Sprite sheet: assets/img/oneko.gif (from adryd325/oneko.js, MIT). */
+   Cat-left (blue) chases the cursor; cat-right (pink) chases cat-left.
+   Sprites: assets/img/oneko-blue.png / oneko-pink.png (recolored from adryd325/oneko.js, MIT). */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var SPRITE = 'assets/img/oneko.gif';
   var SPEED = 30;
   var mouseX = 0, mouseY = 0;
 
@@ -34,14 +33,14 @@
     NW: [[-1, 0], [-1, -1]]
   };
 
-  function Neko(id, startX, startY, getTarget) {
+  function Neko(id, startX, startY, sprite, getTarget) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
     el.setAttribute('aria-hidden', 'true');
     el.style.width = '32px';
     el.style.height = '32px';
-    el.style.backgroundImage = 'url(' + SPRITE + ')';
+    el.style.backgroundImage = 'url(' + sprite + ')';
     document.body.appendChild(el);
 
     var posX = startX, posY = startY;
@@ -135,10 +134,10 @@
     };
   }
 
-  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, function () {
+  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue.png', function () {
     return { x: mouseX, y: mouseY };
   });
-  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, function () {
+  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink.png', function () {
     return { x: cat1.getX(), y: cat1.getY() };
   });
 })();
