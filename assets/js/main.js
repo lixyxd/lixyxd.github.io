@@ -201,6 +201,8 @@
   setInterval(tickClock, 1000);
   if (navWeather) {
     (function () {
+      var done = false;
+      var setText = function (s) { if (!done) { done = true; navWeather.textContent = s; } };
       var iconFor = function (code) {
         if (code === 0) return '☀️';
         if (code <= 3) return '🌤️';
@@ -210,19 +212,19 @@
         if (code <= 82) return '🌧️';
         return '⛈️';
       };
-      fetch('https://ipapi.co/json/')
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); setText('☁️ --°C'); }, 8000);
+      // fixed Hangzhou weather (30.2741, 120.1551), not visitor-IP based
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=30.2741&longitude=120.1551&current=temperature_2m,weather_code',
+        ctrl ? { signal: ctrl.signal } : undefined)
         .then(function (r) { return r.json(); })
-        .then(function (ip) {
-          var lat = ip.latitude, lon = ip.longitude, city = ip.city || '';
-          return fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,weather_code')
-            .then(function (r) { return r.json(); })
-            .then(function (w) {
-              var cur = w.current || {};
-              var temp = Math.round(cur.temperature_2m || 0);
-              navWeather.textContent = iconFor(cur.weather_code || 0) + ' ' + temp + '°C' + (city ? ' ' + city : '');
-            });
+        .then(function (w) {
+          clearTimeout(timer);
+          var cur = (w && w.current) || {};
+          var temp = Math.round(cur.temperature_2m || 0);
+          setText(iconFor(cur.weather_code == null ? 0 : cur.weather_code) + ' ' + temp + '°C 杭州');
         })
-        .catch(function () { navWeather.textContent = '☁️ --°C'; });
+        .catch(function () { clearTimeout(timer); setText('☁️ --°C'); });
     })();
   }
 
