@@ -126,6 +126,7 @@
 
   /* ---- nav clock + lunar + weather (IP-based) ---- */
   var navDate = document.getElementById('navDate');
+  var navLunar = document.getElementById('navLunar');
   var navTime = document.getElementById('navTime');
   var navWeather = document.getElementById('navWeather');
   var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
@@ -189,10 +190,10 @@
   };
   var tickClock = function () {
     var d = new Date();
-    if (navDate) {
+    if (navDate) navDate.textContent = '公元' + d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 周' + WEEK[d.getDay()];
+    if (navLunar) {
       var l = solar2lunar(d.getFullYear(), d.getMonth() + 1, d.getDate());
-      navDate.textContent = '公元' + d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 周' + WEEK[d.getDay()] +
-        ' · 农历' + l.gan + l.zhi + '年' + (l.isLeap ? '闰' : '') + MONTH_CN[l.month - 1] + DAY_CN[l.day - 1];
+      navLunar.textContent = '农历' + l.gan + l.zhi + '年 ' + (l.isLeap ? '闰' : '') + MONTH_CN[l.month - 1] + DAY_CN[l.day - 1];
     }
     if (navTime) navTime.textContent = pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
   };

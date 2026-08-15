@@ -183,12 +183,14 @@ em{font-style:normal;}
 .brand .blip{animation:blip-pulse 2.4s ease-in-out infinite;}
 @keyframes radar-sweep{to{transform:rotate(360deg);}}
 @keyframes blip-pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
-.brand-info{display:flex; flex-direction:column; gap:1px; padding:4px 12px;
-  border:1px solid var(--line); border-radius:10px; background:rgba(56,189,248,.05); line-height:1.35;}
-.brand-info .bi-date{font-size:10.5px; color:var(--faint); font-weight:400; letter-spacing:.3px; white-space:nowrap;}
-.brand-info .bi-row{display:flex; align-items:baseline; gap:8px;}
-.brand-info .bi-time{font-size:16px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:.5px;}
-.brand-info .bi-weather{font-size:11px; color:var(--dim); font-weight:400;}
+.clock-card{width:196px; text-align:center; background:var(--card-grad); border:1px solid var(--line-card);
+  border-radius:12px; padding:11px 12px 10px; box-shadow:var(--shadow-1); position:relative; overflow:hidden;}
+.clock-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.5), transparent);}
+.clock-card .cc-row{display:flex; align-items:baseline; justify-content:center; gap:8px;}
+.clock-card .cc-time{font-size:22px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:1px;}
+.clock-card .cc-weather{font-size:11px; color:var(--dim);}
+.clock-card .cc-date{display:block; margin-top:4px; font-size:11.5px; color:var(--faint);}
+.clock-card .cc-lunar{display:block; font-size:10.5px; color:var(--dim);}
 .links{display:flex; gap:6px;}
 .links a{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:104px; padding:5px 14px 6px; border-radius:10px; gap:2px;
@@ -489,7 +491,6 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
 /* responsive */
 @media (max-width:760px){
   .nav-toggle{display:block;}
-  .bi-date{display:none;}
   .bg-globe{width:170vw; bottom:-68vw;}
   .links{position:absolute; top:60px; left:0; right:0; background:rgba(28,48,90,.97); border-bottom:1px solid var(--line);
     flex-direction:column; padding:12px 22px 18px; gap:4px; display:none; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
@@ -502,6 +503,8 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .avatar-role{width:132px; padding:7px 10px;}
   .avatar-role h1.ar-name{font-size:16px;}
   .avatar-role .ar-role{font-size:13px;}
+  .clock-card{width:132px; padding:9px 10px;}
+  .clock-card .cc-time{font-size:18px;}
   .hero-focus{gap:8px; margin-top:10px;}
   .focus-chip{font-size:12px; padding:3px 11px;}
   .avatar-wrap::before{inset:-11px;}
