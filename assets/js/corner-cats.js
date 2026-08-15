@@ -61,7 +61,7 @@
     };
   }
 
-  function Neko(id, startX, startY, sprite, stopDist, playFn) {
+  function Neko(id, startX, startY, sprite, stopDist, playFn, startAt) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
@@ -78,6 +78,7 @@
     function getTarget() {
       if (followMode && Date.now() < followUntil) return { x: mouseX, y: mouseY };
       followMode = false;
+      if (Date.now() < startAt) return { x: startX, y: startY }; // stay at own corner first
       if (!playTarget || Date.now() > retargetAt) {
         var t = playFn(posX, posY);
         playTarget = { x: t.x, y: t.y };
@@ -174,7 +175,8 @@
     };
   }
 
-  var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48, leaderPlay);
+  var t0 = Date.now();
+  var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48, leaderPlay, t0 + 3000);
   /* follower: always aim near the leader, retarget often for smooth trailing */
   new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100, function (px, py) {
     var b = { x: cat1.getX(), y: cat1.getY() };
@@ -183,6 +185,6 @@
       y: clamp(b.y + (Math.random() * 60 - 30), 16, window.innerHeight - 16),
       cooldown: 500 + Math.random() * 800
     };
-  });
+  }, t0 + 4000);
 })();
 
