@@ -68,6 +68,12 @@ em{font-style:normal;}
 .starfield{position:absolute; inset:0; width:100%; height:100%; display:block;}
 .star{animation:twinkle 3.8s ease-in-out infinite;}
 @keyframes twinkle{0%,100%{opacity:.15;} 50%{opacity:.55;}}
+/* shooting stars (spawned by meteors.js) */
+.meteor{position:absolute; width:120px; height:3px; border-radius:999px; pointer-events:none; opacity:0;
+  transform:rotate(35deg);
+  background:linear-gradient(90deg, rgba(200,230,255,.9), rgba(200,230,255,0));}
+.meteor::before{content:""; position:absolute; left:0; top:50%; width:5px; height:5px; margin-top:-3px;
+  border-radius:50%; background:#fff; box-shadow:0 0 8px 3px rgba(200,230,255,.8);}
 /* sun: orbits the Earth (position driven by JS); granulated disk + soft corona, no fake rotating rays */
 .bg-sun{position:absolute; left:0; top:0; width:132px; height:132px; z-index:0; pointer-events:none; opacity:.85;}
 .sun-halo{position:absolute; inset:-90px; border-radius:50%;
