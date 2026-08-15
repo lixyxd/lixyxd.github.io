@@ -33,7 +33,7 @@
     NW: [[-1, 0], [-1, -1]]
   };
 
-  function Neko(id, startX, startY, sprite, getTarget) {
+  function Neko(id, startX, startY, sprite, stopDist, getTarget) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
@@ -90,7 +90,7 @@
       var dx = posX - t.x, dy = posY - t.y;
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < SPEED || dist < 48) { idle(); return; }
+      if (dist < SPEED || dist < stopDist) { idle(); return; }
 
       idleAnimation = null;
       idleAnimationFrame = 0;
@@ -134,10 +134,10 @@
     };
   }
 
-  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue-v2.png', function () {
+  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue-v2.png', 48, function () {
     return { x: mouseX, y: mouseY };
   });
-  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink-v2.png', function () {
+  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink-v2.png', 100, function () {
     return { x: cat1.getX(), y: cat1.getY() };
   });
 })();
