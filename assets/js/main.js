@@ -97,7 +97,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ---- back to top ---- */
+  /* ---- back to top / bottom ---- */
   var toTop = document.getElementById('toTop');
   if (toTop) {
     var toggleToTop = function () {
@@ -107,6 +107,20 @@
     toggleToTop();
     toTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+  var toBottom = document.getElementById('toBottom');
+  if (toBottom) {
+    var toggleToBottom = function () {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var y = window.scrollY || doc.scrollTop;
+      toBottom.classList.toggle('show', max > 0 && y < max - 400);
+    };
+    window.addEventListener('scroll', toggleToBottom, { passive: true });
+    toggleToBottom();
+    toBottom.addEventListener('click', function () {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   }
 
