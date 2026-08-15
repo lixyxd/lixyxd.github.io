@@ -340,6 +340,11 @@ em{font-style:normal;}
 .honor-card em{font-size:11.5px; color:var(--dim);}
 .stu{display:inline-block; font-size:12px; font-weight:700; color:var(--amber); border:1px solid rgba(251,191,36,.45);
   background:rgba(251,191,36,.1); border-radius:999px; padding:2px 11px; margin:6px 6px 0 0;}
+.stu.lead{border-color:rgba(251,191,36,.8); background:rgba(251,191,36,.18);}
+.stu.lead em{font-style:normal; font-size:9.5px; font-weight:800; color:#04121f; background:var(--amber);
+  border-radius:999px; padding:0 5px; margin-left:4px;}
+.award{display:inline-block; font-size:11px; font-weight:700; color:var(--green); border:1px solid rgba(52,211,153,.4);
+  background:rgba(52,211,153,.1); border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:2px;}
 
 /* publications */
 .pub-filters{display:flex; gap:8px; margin-left:auto;}
