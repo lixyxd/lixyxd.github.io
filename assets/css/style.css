@@ -3,9 +3,9 @@
    Dark tech "radar" theme — polished edition
    ============================================================ */
 :root{
-  --bg:#060b18; --bg2:#0c1528; --panel:#0f1a30; --panel2:#14213c;
-  --line:rgba(120,160,220,.2); --line-strong:rgba(120,160,220,.38);
-  --txt:#e6edfb; --dim:#aabfdf; --faint:#7e95ba;
+  --bg:#060b18; --bg2:#0d1730; --panel:#101c38; --panel2:#16234a;
+  --line:rgba(120,160,220,.24); --line-strong:rgba(120,160,220,.42);
+  --txt:#eef4ff; --dim:#c0d2ec; --faint:#93a9cc;
   --sky:#38bdf8; --blue:#2563eb; --amber:#fbbf24; --rose:#fb7185;
   --green:#34d399; --violet:#a78bfa; --cyan:#22d3ee;
   --grad-main:linear-gradient(120deg,#38bdf8,#6366f1 55%,#a78bfa);
@@ -13,9 +13,9 @@
   --radius:14px;
   --shadow-1:0 10px 30px rgba(2,6,18,.55);
   --glow-sky:0 0 0 1px rgba(56,189,248,.25), 0 8px 40px rgba(56,189,248,.18);
-  --card:rgba(24,40,74,.72);
-  --card-grad:linear-gradient(180deg, rgba(32,52,96,.8), rgba(19,32,60,.7));
-  --line-card:rgba(134,180,240,.32);
+  --card:rgba(30,50,92,.78);
+  --card-grad:linear-gradient(180deg, rgba(44,70,126,.88), rgba(27,45,84,.8));
+  --line-card:rgba(150,198,250,.42);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 html{scroll-behavior:smooth;}
@@ -311,7 +311,7 @@ em{font-style:normal;}
 .honor-card{display:flex; gap:13px; background:var(--card-grad); border:1px solid var(--line-card);
   border-radius:12px; padding:14px; align-items:flex-start; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   transition:.2s; position:relative; overflow:hidden;}
-.honor-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(251,191,36,.5), transparent);}
+.honor-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(251,191,36,.6), transparent);}
 .honor-card:hover{transform:translateY(-3px); border-color:rgba(251,191,36,.4); box-shadow:0 12px 34px rgba(2,6,18,.5);}
 .hc-icon{font-size:22px; flex:none; filter:drop-shadow(0 2px 8px rgba(56,189,248,.35));}
 .honor-card b{font-size:13.5px; display:block; margin-bottom:3px;}
@@ -332,7 +332,7 @@ em{font-style:normal;}
 .pub{display:flex; gap:16px; background:var(--card-grad); border:1px solid var(--line-card);
   border-radius:13px; padding:14px 16px; margin-bottom:11px; transition:.2s; position:relative; overflow:hidden;
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
-.pub::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.45), transparent);}
+.pub::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.6), transparent);}
 .pub:hover{border-color:rgba(56,189,248,.45); transform:translateY(-2px);
   box-shadow:0 14px 36px rgba(2,6,18,.55), 0 0 22px rgba(56,189,248,.08);}
 .pub-year{flex:none; width:54px; height:54px; border-radius:11px; display:flex; align-items:center; justify-content:center;
@@ -395,7 +395,7 @@ em{font-style:normal;}
 .contact-card{display:flex; gap:13px; align-items:center; background:var(--card-grad); border:1px solid var(--line-card);
   border-radius:13px; padding:15px; color:var(--txt); transition:.2s; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   position:relative; overflow:hidden;}
-.contact-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.45), transparent);}
+.contact-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.6), transparent);}
 .contact-card:hover{border-color:rgba(56,189,248,.45); transform:translateY(-3px); text-decoration:none;
   box-shadow:0 12px 34px rgba(2,6,18,.5), 0 0 20px rgba(56,189,248,.07);}
 .cc-icon{font-size:22px; flex:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center;
