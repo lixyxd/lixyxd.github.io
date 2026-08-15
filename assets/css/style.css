@@ -3,9 +3,9 @@
    Dark tech "radar" theme — polished edition
    ============================================================ */
 :root{
-  --bg:#070d1c; --bg2:#0c1528; --panel:#0f1a30; --panel2:#14213c;
-  --line:rgba(120,160,220,.16); --line-strong:rgba(120,160,220,.32);
-  --txt:#e2eaf8; --dim:#9db2d6; --faint:#6b81a8;
+  --bg:#060b18; --bg2:#0c1528; --panel:#0f1a30; --panel2:#14213c;
+  --line:rgba(120,160,220,.2); --line-strong:rgba(120,160,220,.38);
+  --txt:#e6edfb; --dim:#aabfdf; --faint:#7e95ba;
   --sky:#38bdf8; --blue:#2563eb; --amber:#fbbf24; --rose:#fb7185;
   --green:#34d399; --violet:#a78bfa; --cyan:#22d3ee;
   --grad-main:linear-gradient(120deg,#38bdf8,#6366f1 55%,#a78bfa);
@@ -13,9 +13,9 @@
   --radius:14px;
   --shadow-1:0 10px 30px rgba(2,6,18,.55);
   --glow-sky:0 0 0 1px rgba(56,189,248,.25), 0 8px 40px rgba(56,189,248,.18);
-  --card:rgba(15,26,48,.55);
-  --card-grad:linear-gradient(180deg, rgba(21,34,64,.62), rgba(12,21,40,.5));
-  --line-card:rgba(120,160,220,.18);
+  --card:rgba(24,40,74,.72);
+  --card-grad:linear-gradient(180deg, rgba(32,52,96,.8), rgba(19,32,60,.7));
+  --line-card:rgba(134,180,240,.32);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 html{scroll-behavior:smooth;}
@@ -172,7 +172,7 @@ em{font-style:normal;}
   box-shadow:0 0 12px rgba(56,189,248,.8); border-radius:0 3px 3px 0;}
 
 /* ---------- nav ---------- */
-.nav{position:sticky; top:0; z-index:60; background:rgba(7,13,28,.78);
+.nav{position:sticky; top:0; z-index:60; background:rgba(7,13,28,.85);
   backdrop-filter:blur(14px) saturate(1.4); -webkit-backdrop-filter:blur(14px) saturate(1.4);
   border-bottom:1px solid var(--line);}
 .nav-inner{max-width:1080px; margin:0 auto; padding:0 22px; height:60px; display:flex; align-items:center; justify-content:space-between;}
@@ -284,7 +284,7 @@ em{font-style:normal;}
 .side-card h3:first-child{margin-top:0;}
 .glance{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px; grid-auto-rows:1fr;}
 .glance li{display:flex; gap:7px; align-items:flex-start; padding:8px 10px; background:rgba(56,189,248,.05);
-  border:1px solid rgba(120,160,220,.15); border-radius:9px; transition:border-color .18s, background .18s, transform .18s;}
+  border:1px solid rgba(134,180,240,.28); border-radius:9px; transition:border-color .18s, background .18s, transform .18s;}
 .glance li:hover{border-color:rgba(56,189,248,.42); background:rgba(56,189,248,.09); transform:translateY(-1px);}
 .glance .g-ic{font-size:14px; line-height:1.4; flex:none;}
 .glance .g-tx{min-width:0;}
@@ -403,6 +403,9 @@ em{font-style:normal;}
 .contact-card:hover .cc-icon{background:rgba(56,189,248,.16);}
 .contact-card b{font-size:13.5px;}
 .contact-card span{font-size:12px; color:var(--dim); word-break:break-all;}
+
+/* glass card base: lift content above the dark background */
+.pub,.honor-card,.contact-card,.patent-list li,.side-card,.proj-card,.glance li,.pf{box-shadow:0 10px 26px rgba(2,6,18,.55), inset 0 1px 0 rgba(255,255,255,.05);}
 
 /* footer */
 .footer{border-top:1px solid var(--line); margin-top:30px; background:rgba(7,13,28,.85);
