@@ -73,13 +73,23 @@
     return { l1: l1, l2: l2, r1: r1, r2: r2 };
   }
 
-  /* leader: walk to a nearby spot, then rest for a while */
+  /* leader: walk to a nearby spot, rest; occasionally cross to the other side */
   function leaderPlay(px, py) {
-    return {
-      x: clamp(px + (Math.random() - 0.5) * 640, 40, window.innerWidth - 40),
-      y: clamp(py + (Math.random() - 0.5) * 460, 40, window.innerHeight - 40),
-      cooldown: 3500 + Math.random() * 5000
-    };
+    var W = window.innerWidth;
+    var mid = W / 2;
+    var cross = Math.random() < 0.22; // ~22% chance to switch sides
+    var g = margins();
+    var l2 = g.m - 54, r1 = W - g.m + 54;
+    var x;
+    if (cross) {
+      x = (px < mid)
+        ? clamp(r1 + Math.random() * Math.max(20, (W - 16) - r1), r1, W - 16)
+        : clamp(16 + Math.random() * Math.max(20, l2 - 16), 16, l2);
+    } else {
+      x = clamp(px + (Math.random() - 0.5) * 640, 16, W - 16);
+    }
+    var y = clamp(py + (Math.random() - 0.5) * 460, 40, window.innerHeight - 40);
+    return { x: x, y: y, cooldown: 3500 + Math.random() * 5000 };
   }
 
   function Neko(id, startX, startY, sprite, stopDist, playFn, startAt) {
