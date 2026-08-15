@@ -241,13 +241,12 @@ em{font-style:normal;}
 .unit-chip em{font-style:normal; font-size:10.5px; color:var(--dim); font-weight:400;}
 .unit-chip:hover{color:var(--amber); border-color:rgba(251,191,36,.85); background:rgba(251,191,36,.2);
   box-shadow:0 0 16px rgba(251,191,36,.3); text-decoration:none; transform:translateY(-1px);}
-.hero-focus{display:flex; flex-direction:column; gap:9px; margin-top:10px; width:fit-content;
-  background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.3); border-radius:12px; padding:10px 14px;}
-.focus-label{font-size:11px; font-weight:700; color:var(--amber); letter-spacing:1.5px;}
+.hero-focus{display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap;}
+.focus-label{flex:none; font-size:11.5px; font-weight:700; color:var(--amber); letter-spacing:1.5px;}
 .focus-chips{display:flex; gap:8px; flex-wrap:wrap;}
-.focus-chip{font-size:13px; font-weight:600; color:var(--amber); border:1px solid rgba(251,191,36,.4);
-  background:rgba(251,191,36,.1); border-radius:999px; padding:4px 13px; transition:.18s;}
-.focus-chip:hover{border-color:rgba(251,191,36,.75); background:rgba(251,191,36,.16); transform:translateY(-1px);}
+.focus-chip{font-size:13px; font-weight:600; color:var(--sky); border:1px solid rgba(56,189,248,.4);
+  background:rgba(56,189,248,.1); border-radius:999px; padding:4px 13px; transition:.18s;}
+.focus-chip:hover{border-color:rgba(56,189,248,.7); background:rgba(56,189,248,.16); transform:translateY(-1px);}
 .focus-chip em{font-style:normal; font-size:10px; color:var(--dim); font-weight:400; margin-left:5px; letter-spacing:.3px;}
 .hero-stats{display:flex; gap:30px; margin:24px 0;}
 .stat{position:relative; padding-left:16px;}
@@ -492,7 +491,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .avatar-wrap,.avatar{width:132px; height:132px;}
   .avatar-role{width:132px; padding:7px 10px;}
   .avatar-role .ar-role{font-size:13px;}
-  .hero-focus{padding:8px 10px; gap:8px;}
+  .hero-focus{gap:8px; margin-top:10px;}
   .focus-chip{font-size:12px; padding:3px 11px;}
   .avatar-wrap::before{inset:-11px;}
   .avatar-status{right:-4px; bottom:-4px;}
