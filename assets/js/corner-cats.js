@@ -6,7 +6,7 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var SPRITE = 'assets/img/oneko.gif';
-  var SPEED = 10;
+  var SPEED = 16;
   var mouseX = 0, mouseY = 0;
 
   document.addEventListener('mousemove', function (e) {
