@@ -65,6 +65,13 @@
     if (x <= (l2 + r1) / 2) return clamp(x, 16, l2);
     return clamp(x, r1, g.W - 16);
   }
+  function regions() {
+    var g = margins();
+    var l1 = 16, l2 = g.m - 54;
+    var r1 = g.W - g.m + 54, r2 = g.W - 16;
+    if (l2 < 46 || r1 > g.W - 46) return null;
+    return { l1: l1, l2: l2, r1: r1, r2: r2 };
+  }
 
   /* leader: walk to a nearby spot, then rest for a while */
   function leaderPlay(px, py) {
@@ -154,16 +161,9 @@
 
       if (dist < SPEED || dist < stopDist) { idle(); return; }
 
-      // crossing the content column: teleport straight across so the cats can reunite
-      var mid = window.innerWidth / 2;
-      if ((posX < mid) !== (t.x < mid)) {
-        posX = t.x;
-        posY = clamp(t.y, 16, window.innerHeight - 16);
-        el.style.left = (posX - 16) + 'px';
-        el.style.top = (posY - 16) + 'px';
-        idle();
-        return;
-      }
+      var reg = regions();
+      if (!reg) { el.style.display = 'none'; return; } // no margin room: hide cat
+      if (el.style.display === 'none') el.style.display = '';
 
       idleAnimation = null;
       idleAnimationFrame = 0;
@@ -184,11 +184,22 @@
 
       posX -= (dx / dist) * SPEED;
       posY -= (dy / dist) * SPEED;
-      var ax = allowedX(posX);
-      if (ax === null) { el.style.display = 'none'; return; } // no margin room: hide cat
-      if (el.style.display === 'none') el.style.display = '';
-      posX = ax;
+
+      // clamp to the current margin strip
+      var mid = window.innerWidth / 2;
+      var leftSide = posX < mid;
+      var tgtLeft = t.x < mid;
+      var lo = leftSide ? reg.l1 : reg.r1;
+      var hi = leftSide ? reg.l2 : reg.r2;
+      posX = clamp(posX, lo, hi);
       posY = clamp(posY, 16, window.innerHeight - 16);
+
+      // crossing the content area: run to the strip edge, then teleport across to the other strip edge
+      if (tgtLeft !== leftSide) {
+        if (leftSide && posX >= reg.l2) posX = reg.r1;
+        else if (!leftSide && posX <= reg.r1) posX = reg.l2;
+      }
+
       el.style.left = (posX - 16) + 'px';
       el.style.top = (posY - 16) + 'px';
     }
