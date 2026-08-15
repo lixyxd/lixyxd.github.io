@@ -1,5 +1,6 @@
 /* corner-cats.js — two pixel cats.
-   PLAY MODE (default): the two cats wander and chase each other by themselves.
+   PLAY MODE (default): leader (orange) wanders locally with long rests,
+   follower (pink) stays close to the leader — calm, cat-like.
    FOLLOW MODE: clicking the blank left/right margins makes them chase the cursor
    for ~6 seconds, then they go back to playing.
    Sprites: assets/img/oneko-orange-v3.png / oneko-pink-v2.png
@@ -49,7 +50,18 @@
     NW: [[-1, 0], [-1, -1]]
   };
 
-  function Neko(id, startX, startY, sprite, stopDist) {
+  function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+  /* leader: walk to a nearby spot, then rest for a while */
+  function leaderPlay(px, py) {
+    return {
+      x: clamp(px + (Math.random() - 0.5) * 640, 40, window.innerWidth - 40),
+      y: clamp(py + (Math.random() - 0.5) * 460, 40, window.innerHeight - 40),
+      cooldown: 3500 + Math.random() * 5000
+    };
+  }
+
+  function Neko(id, startX, startY, sprite, stopDist, playFn) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
@@ -61,31 +73,17 @@
 
     var posX = startX, posY = startY;
     var frameCount = 0, idleTime = 0, idleAnimation = null, idleAnimationFrame = 0, lastTs = null;
-    var playTarget = null, retargetAt = 0, buddy = null;
-
-    function setBuddy(fn) { buddy = fn; }
-
-    function pickPlayTarget() {
-      var now = Date.now();
-      if (!playTarget || now > retargetAt) {
-        retargetAt = now + 1200 + Math.random() * 2800;
-        if (buddy && Math.random() < 0.5) {
-          var b = buddy();
-          playTarget = { x: b.x, y: b.y };
-        } else {
-          playTarget = {
-            x: 50 + Math.random() * (window.innerWidth - 100),
-            y: 60 + Math.random() * (window.innerHeight - 120)
-          };
-        }
-      }
-      return playTarget;
-    }
+    var playTarget = null, retargetAt = 0;
 
     function getTarget() {
       if (followMode && Date.now() < followUntil) return { x: mouseX, y: mouseY };
       followMode = false;
-      return pickPlayTarget();
+      if (!playTarget || Date.now() > retargetAt) {
+        var t = playFn(posX, posY);
+        playTarget = { x: t.x, y: t.y };
+        retargetAt = Date.now() + t.cooldown;
+      }
+      return playTarget;
     }
 
     function resetIdle() { idleAnimation = null; idleAnimationFrame = 0; }
@@ -153,8 +151,8 @@
 
       posX -= (dx / dist) * SPEED;
       posY -= (dy / dist) * SPEED;
-      posX = Math.min(Math.max(16, posX), window.innerWidth - 16);
-      posY = Math.min(Math.max(16, posY), window.innerHeight - 16);
+      posX = clamp(posX, 16, window.innerWidth - 16);
+      posY = clamp(posY, 16, window.innerHeight - 16);
       el.style.left = (posX - 16) + 'px';
       el.style.top = (posY - 16) + 'px';
     }
@@ -171,14 +169,20 @@
     requestAnimationFrame(loop);
 
     return {
-      setBuddy: setBuddy,
       getX: function () { return posX; },
       getY: function () { return posY; }
     };
   }
 
-  var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48);
-  var cat2 = new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100);
-  cat1.setBuddy(function () { return { x: cat2.getX(), y: cat2.getY() }; });
-  cat2.setBuddy(function () { return { x: cat1.getX(), y: cat1.getY() }; });
+  var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48, leaderPlay);
+  /* follower: always aim near the leader, retarget often for smooth trailing */
+  new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100, function (px, py) {
+    var b = { x: cat1.getX(), y: cat1.getY() };
+    return {
+      x: clamp(b.x + (Math.random() * 60 - 30), 16, window.innerWidth - 16),
+      y: clamp(b.y + (Math.random() * 60 - 30), 16, window.innerHeight - 16),
+      cooldown: 500 + Math.random() * 800
+    };
+  });
 })();
+
