@@ -134,10 +134,10 @@
     };
   }
 
-  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue.png', function () {
+  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-blue-v2.png', function () {
     return { x: mouseX, y: mouseY };
   });
-  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink.png', function () {
+  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink-v2.png', function () {
     return { x: cat1.getX(), y: cat1.getY() };
   });
 })();
