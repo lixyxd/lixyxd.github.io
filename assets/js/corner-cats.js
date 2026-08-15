@@ -1,16 +1,32 @@
-/* corner-cats.js — oneko-style pixel cats with mouse interaction.
-   Cat-left (blue) chases the cursor; cat-right (pink) chases cat-left.
-   Sprites: assets/img/oneko-blue.png / oneko-pink.png (recolored from adryd325/oneko.js, MIT). */
+/* corner-cats.js — two pixel cats.
+   PLAY MODE (default): the two cats wander and chase each other by themselves.
+   FOLLOW MODE: clicking the blank left/right margins makes them chase the cursor
+   for ~6 seconds, then they go back to playing.
+   Sprites: assets/img/oneko-orange-v3.png / oneko-pink-v2.png
+   (recolored from adryd325/oneko.js, MIT). */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var SPEED = 30;
+  var FOLLOW_MS = 6000;
   var mouseX = 0, mouseY = 0;
+  var followMode = false, followUntil = 0;
 
   document.addEventListener('mousemove', function (e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
+  });
+  document.addEventListener('click', function (e) {
+    var W = window.innerWidth;
+    var margin = Math.max((W - 1080) / 2, 0); // centered content column leaves blank margins
+    var inMargin = e.clientX < margin - 10 || e.clientX > W - margin + 10;
+    if (inMargin || margin <= 0) {
+      followMode = true;
+      followUntil = Date.now() + FOLLOW_MS;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }
   });
 
   var spriteSets = {
@@ -33,7 +49,7 @@
     NW: [[-1, 0], [-1, -1]]
   };
 
-  function Neko(id, startX, startY, sprite, stopDist, getTarget) {
+  function Neko(id, startX, startY, sprite, stopDist) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
@@ -45,6 +61,32 @@
 
     var posX = startX, posY = startY;
     var frameCount = 0, idleTime = 0, idleAnimation = null, idleAnimationFrame = 0, lastTs = null;
+    var playTarget = null, retargetAt = 0, buddy = null;
+
+    function setBuddy(fn) { buddy = fn; }
+
+    function pickPlayTarget() {
+      var now = Date.now();
+      if (!playTarget || now > retargetAt) {
+        retargetAt = now + 1200 + Math.random() * 2800;
+        if (buddy && Math.random() < 0.5) {
+          var b = buddy();
+          playTarget = { x: b.x, y: b.y };
+        } else {
+          playTarget = {
+            x: 50 + Math.random() * (window.innerWidth - 100),
+            y: 60 + Math.random() * (window.innerHeight - 120)
+          };
+        }
+      }
+      return playTarget;
+    }
+
+    function getTarget() {
+      if (followMode && Date.now() < followUntil) return { x: mouseX, y: mouseY };
+      followMode = false;
+      return pickPlayTarget();
+    }
 
     function resetIdle() { idleAnimation = null; idleAnimationFrame = 0; }
 
@@ -129,15 +171,14 @@
     requestAnimationFrame(loop);
 
     return {
+      setBuddy: setBuddy,
       getX: function () { return posX; },
       getY: function () { return posY; }
     };
   }
 
-  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, 'assets/img/oneko-orange-v3.png', 48, function () {
-    return { x: mouseX, y: mouseY };
-  });
-  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, 'assets/img/oneko-pink-v2.png', 100, function () {
-    return { x: cat1.getX(), y: cat1.getY() };
-  });
+  var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48);
+  var cat2 = new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100);
+  cat1.setBuddy(function () { return { x: cat2.getX(), y: cat2.getY() }; });
+  cat2.setBuddy(function () { return { x: cat1.getX(), y: cat1.getY() }; });
 })();
