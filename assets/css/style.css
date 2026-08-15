@@ -185,6 +185,7 @@ em{font-style:normal;}
 @keyframes blip-pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
 .brand-info{display:flex; flex-direction:column; line-height:1.25;}
 .brand-info .bi-date{font-size:11px; color:var(--faint); font-weight:400; letter-spacing:.5px;}
+.brand-info .bi-lunar{font-size:10px; color:var(--dim); font-weight:400; letter-spacing:.5px;}
 .brand-info .bi-row{display:flex; align-items:baseline; gap:8px;}
 .brand-info .bi-time{font-size:17px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:.5px;}
 .brand-info .bi-weather{font-size:11.5px; color:var(--dim); font-weight:400;}
