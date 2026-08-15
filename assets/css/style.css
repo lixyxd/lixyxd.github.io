@@ -186,9 +186,7 @@ em{font-style:normal;}
 .brand .blip{animation:blip-pulse 2.4s ease-in-out infinite;}
 @keyframes radar-sweep{to{transform:rotate(360deg);}}
 @keyframes blip-pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
-.clock-card{width:196px; text-align:center; background:var(--card-grad); border:1px solid var(--line-card);
-  border-radius:12px; padding:11px 12px 10px; box-shadow:var(--shadow-1); position:relative; overflow:hidden;}
-.clock-card::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(56,189,248,.5), transparent);}
+.clock-card{text-align:center;}
 .clock-card .cc-row{display:flex; align-items:baseline; justify-content:center; gap:8px;}
 .clock-card .cc-time{font-size:22px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:1px;}
 .clock-card .cc-weather{font-size:11px; color:var(--dim);}
@@ -214,19 +212,18 @@ em{font-style:normal;}
 .nav-toggle span{display:block; width:20px; height:2px; background:var(--txt); margin:4px 0; border-radius:2px; transition:.22s;}
 
 /* ---------- hero ---------- */
-.hero{max-width:1080px; margin:0 auto; padding:30px 28px; position:relative;
-  background:var(--card-grad); border:1px solid var(--line-card); border-radius:16px;
-  box-shadow:var(--shadow-1); overflow:hidden;}
-.hero::before{content:""; position:absolute; top:0; left:0; right:0; height:1px; pointer-events:none;
-  background:linear-gradient(90deg, transparent, rgba(56,189,248,.5), transparent);}
+.hero{max-width:1080px; margin:0 auto; padding:44px 22px 30px; position:relative;}
 .hero-grid{display:flex; gap:38px; align-items:center; flex-wrap:wrap;}
 .avatar-wrap{position:relative; flex:none; width:196px; height:196px;}
-.avatar-col{display:flex; flex-direction:column; align-items:center; gap:12px; flex:none;}
-.avatar-role{width:196px; text-align:center; background:rgba(9,15,31,.62); border:1px solid var(--line-strong);
-  border-radius:12px; padding:10px 12px; box-shadow:var(--shadow-1);}
+.avatar-col{display:flex; flex-direction:column; align-items:center; flex:none;}
+.profile-card{width:220px; display:flex; flex-direction:column; align-items:center; gap:10px;
+  padding:14px 12px 13px; background:var(--card-grad); border:1px solid var(--line-card);
+  border-radius:14px; box-shadow:var(--shadow-1);}
+.avatar-role{text-align:center;}
 .avatar-role .ar-role{display:block; font-size:15px; font-weight:700; color:var(--sky); letter-spacing:.5px;
   text-shadow:0 0 18px rgba(56,189,248,.5);}
 .avatar-role .ar-role-en{display:block; font-size:10.5px; color:var(--dim); margin-top:3px;}
+.pc-divider{width:76%; height:1px; background:linear-gradient(90deg, transparent, var(--line-strong), transparent);}
 .avatar-wrap::before{content:""; position:absolute; inset:-14px; border-radius:28px;
   background:conic-gradient(from 0deg, transparent 0 300deg, rgba(56,189,248,.9) 330deg, transparent 360deg);
   -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
@@ -258,21 +255,21 @@ em{font-style:normal;}
   background:rgba(56,189,248,.1); border-radius:999px; padding:4px 13px; transition:.18s;}
 .focus-chip:hover{border-color:rgba(56,189,248,.7); background:rgba(56,189,248,.16); transform:translateY(-1px);}
 .focus-chip em{font-style:normal; font-size:10px; color:var(--dim); font-weight:400; margin-left:5px; letter-spacing:.3px;}
-.hero-stats{display:flex; gap:30px; margin:24px 0;}
+.hero-stats{display:flex; gap:30px; margin:0 0 14px; border-top:1px solid rgba(120,160,220,.18); padding-top:14px;}
 .stat{position:relative; padding-left:16px;}
 .stat::before{content:""; position:absolute; left:0; top:4px; bottom:4px; width:2px; border-radius:2px; background:var(--grad-main);}
 .stat b{display:block; font-size:27px; letter-spacing:.5px; line-height:1.15;
   background:var(--grad-main); -webkit-background-clip:text; background-clip:text; color:transparent; font-variant-numeric:tabular-nums;}
 .stat span{font-size:11.5px; color:var(--dim); line-height:1.35; display:block;}
 .stat em{color:var(--faint); font-size:10.5px;}
-.hero-cta{display:flex; gap:12px; flex-wrap:wrap;}
+.hero-cta{display:flex; gap:12px; flex-wrap:wrap; border-top:1px solid rgba(120,160,220,.18); padding-top:14px;}
 .btn{display:inline-block; padding:11px 24px; border-radius:11px; font-size:14px; font-weight:600; transition:.2s; position:relative; overflow:hidden;}
 .btn.primary{background:var(--grad-main); color:#04121f; box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 6px 24px rgba(56,189,248,.35);}
 .btn.primary:hover{filter:brightness(1.12); text-decoration:none; transform:translateY(-2px); box-shadow:0 10px 32px rgba(56,189,248,.45);}
 .btn.ghost{border:1px solid var(--line-strong); color:var(--txt); background:rgba(15,26,48,.4);}
 .btn.ghost:hover{border-color:var(--sky); color:var(--sky); text-decoration:none; transform:translateY(-2px); box-shadow:var(--glow-sky);}
 /* hero badges (icon pills) */
-.hero-badges{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+.hero-badges{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;}
 .hero-badges a{font-size:12.5px; color:var(--txt); border:1px solid var(--line-strong); border-radius:999px; padding:6px 14px;
   background:rgba(17,28,56,.9); box-shadow:0 4px 14px rgba(2,6,18,.4); transition:.18s; display:inline-flex; align-items:center; gap:6px;}
 .badge-ic{font-size:13px; line-height:1; filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));}
@@ -499,11 +496,10 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .links a{padding:9px 12px; flex-direction:row; justify-content:flex-start; align-items:baseline; gap:8px; min-width:0;}
   .links a i{letter-spacing:1.2px; font-size:15.5px;}
   .links a em{font-size:11px;}
-  .hero{padding:22px 16px;}
+  .hero{padding:26px 16px;}
   .avatar-wrap,.avatar{width:132px; height:132px;}
-  .avatar-role{width:132px; padding:7px 10px;}
+  .profile-card{width:156px; padding:10px;}
   .avatar-role .ar-role{font-size:13px;}
-  .clock-card{width:132px; padding:9px 10px;}
   .clock-card .cc-time{font-size:18px;}
   .hero-focus{gap:8px; margin-top:10px;}
   .focus-chip{font-size:12px; padding:3px 11px;}
