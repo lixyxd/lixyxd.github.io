@@ -36,7 +36,7 @@ body{
 *{scrollbar-width:thin; scrollbar-color:#31548e #1a2c52;}
 a{color:var(--sky); text-decoration:none;}
 a:hover{text-decoration:underline;}
-main{max-width:1080px; margin:0 auto; padding:0 22px; position:relative; z-index:2;}
+main{max-width:1080px; margin:0 auto; padding:0 22px; position:relative; z-index:2; scroll-margin-top:60px;}
 .en{color:var(--dim); font-weight:600; font-size:.72em; letter-spacing:.5px;}
 em{font-style:normal;}
 
