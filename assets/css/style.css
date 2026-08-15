@@ -219,10 +219,10 @@ em{font-style:normal;}
 .profile-card{width:220px; display:flex; flex-direction:column; align-items:center; gap:10px;
   padding:14px 12px 13px; background:var(--card-grad); border:1px solid var(--line-card);
   border-radius:14px; box-shadow:var(--shadow-1);}
-.avatar-role{text-align:center;}
-.avatar-role .ar-role{display:block; font-size:15px; font-weight:700; color:var(--sky); letter-spacing:.5px;
-  text-shadow:0 0 18px rgba(56,189,248,.5);}
-.avatar-role .ar-role-en{display:block; font-size:10.5px; color:var(--dim); margin-top:3px;}
+.hero-role{margin-bottom:14px;}
+.hero-role .hr-cn{display:block; font-size:16px; font-weight:700; color:var(--sky); letter-spacing:.5px;
+  text-shadow:0 0 18px rgba(56,189,248,.45);}
+.hero-role .hr-en{font-size:12px; color:var(--dim);}
 .pc-divider{width:76%; height:1px; background:linear-gradient(90deg, transparent, var(--line-strong), transparent);}
 .avatar-wrap::before{content:""; position:absolute; inset:-14px; border-radius:28px;
   background:conic-gradient(from 0deg, transparent 0 300deg, rgba(56,189,248,.9) 330deg, transparent 360deg);
@@ -237,7 +237,7 @@ em{font-style:normal;}
   box-shadow:var(--shadow-1);}
 .avatar-status i{width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 0 rgba(52,211,153,.6); animation:pulse-dot 2.2s infinite;}
 @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55);} 70%{box-shadow:0 0 0 8px rgba(52,211,153,0);} 100%{box-shadow:0 0 0 0 rgba(52,211,153,0);}}
-.hero-text{flex:1 1 460px; min-width:300px;}
+.hero-text{flex:1 1 460px; min-width:300px; max-width:560px; display:flex; flex-direction:column; justify-content:center;}
 .hero-units{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;}
 .unit-chip{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--amber);
   border:1px solid rgba(251,191,36,.55); background:rgba(251,191,36,.12); border-radius:999px; padding:6px 14px;
@@ -499,7 +499,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .hero{padding:26px 16px;}
   .avatar-wrap,.avatar{width:132px; height:132px;}
   .profile-card{width:156px; padding:10px;}
-  .avatar-role .ar-role{font-size:13px;}
+  .hero-role .hr-cn{font-size:14px;}
   .clock-card .cc-time{font-size:18px;}
   .hero-focus{gap:8px; margin-top:10px;}
   .focus-chip{font-size:12px; padding:3px 11px;}
