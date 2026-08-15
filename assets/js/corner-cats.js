@@ -1,8 +1,9 @@
-/* corner-cats.js — two pixel cats.
-   PLAY MODE (default): leader (orange) wanders locally with long rests,
-   follower (pink) stays close to the leader — calm, cat-like.
-   FOLLOW MODE: clicking the blank left/right margins makes them chase the cursor
-   for ~6 seconds, then they go back to playing.
+/* corner-cats.js — two pixel cats with extra actions & interactions.
+   PLAY MODE: leader (orange) wanders locally with long rests and occasionally
+   crosses to the other side; follower (pink) stays close.
+   FOLLOW MODE: clicking the blank left/right margins makes them chase the cursor.
+   Extra actions: zoomies (dash), tail-chase spin, stretch, sniff-greet between the
+   two cats, and looking up when the cursor is near.
    Sprites: assets/img/oneko-orange-v3.png / oneko-pink-v2.png
    (recolored from adryd325/oneko.js, MIT). */
 (function () {
@@ -12,6 +13,7 @@
   var SPEED = 30;
   var FOLLOW_MS = 6000;
   var HALF = window.innerWidth <= 760 ? 32 : 48; // visual half-width of a cat
+  var SCALE = HALF / 16;
   var mouseX = 0, mouseY = 0;
   var followMode = false, followUntil = 0;
 
@@ -21,7 +23,7 @@
   });
   document.addEventListener('click', function (e) {
     var W = window.innerWidth;
-    var margin = Math.max((W - 1080) / 2, 0); // centered content column leaves blank margins
+    var margin = Math.max((W - 1080) / 2, 0);
     var inMargin = e.clientX < margin - 10 || e.clientX > W - margin + 10;
     if (inMargin || margin <= 0) {
       followMode = true;
@@ -50,10 +52,10 @@
     W: [[-4, -2], [-4, -3]],
     NW: [[-1, 0], [-1, -1]]
   };
+  var SPIN = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 
   function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
 
-  /* cats may only roam the blank margins beside the centered content column */
   function margins() {
     var W = window.innerWidth;
     var m = Math.max((W - 1080) / 2, 0);
@@ -61,7 +63,7 @@
   }
   function allowedX(x) {
     var g = margins();
-    var l2 = g.m - 54, r1 = g.W - g.m + 54; // leave 54px so the cat clears the content
+    var l2 = g.m - 54, r1 = g.W - g.m + 54;
     if (l2 < HALF || r1 > g.W - HALF) return clamp(x, HALF, g.W - HALF); // no margins: full screen
     if (x <= (l2 + r1) / 2) return clamp(x, HALF, l2);
     return clamp(x, r1, g.W - HALF);
@@ -78,18 +80,18 @@
   function leaderPlay(px, py) {
     var W = window.innerWidth;
     var mid = W / 2;
-    var cross = Math.random() < 0.22; // ~22% chance to switch sides
+    var cross = Math.random() < 0.22;
     var g = margins();
     var l2 = g.m - 54, r1 = W - g.m + 54;
     var x;
     if (cross) {
       x = (px < mid)
-        ? clamp(r1 + Math.random() * Math.max(20, (W - 16) - r1), r1, W - 16)
-        : clamp(16 + Math.random() * Math.max(20, l2 - 16), 16, l2);
+        ? clamp(r1 + Math.random() * Math.max(20, (W - HALF) - r1), r1, W - HALF)
+        : clamp(HALF + Math.random() * Math.max(20, l2 - HALF), HALF, l2);
     } else {
-      x = clamp(px + (Math.random() - 0.5) * 640, 16, W - 16);
+      x = clamp(px + (Math.random() - 0.5) * 640, HALF, W - HALF);
     }
-    var y = clamp(py + (Math.random() - 0.5) * 460, 40, window.innerHeight - 40);
+    var y = clamp(py + (Math.random() - 0.5) * 460, HALF, window.innerHeight - HALF);
     return { x: x, y: y, cooldown: 3500 + Math.random() * 5000 };
   }
 
@@ -105,12 +107,14 @@
 
     var posX = startX, posY = startY;
     var frameCount = 0, idleTime = 0, idleAnimation = null, idleAnimationFrame = 0, lastTs = null;
-    var playTarget = null, retargetAt = 0;
+    var playTarget = null, retargetAt = 0, dashUntil = 0, buddy = null;
+
+    function setBuddy(fn) { buddy = fn; }
 
     function getTarget() {
       var t;
       if (followMode && Date.now() < followUntil) t = { x: mouseX, y: mouseY };
-      else if (Date.now() < startAt) t = { x: startX, y: startY }; // stay at own corner first
+      else if (Date.now() < startAt) t = { x: startX, y: startY };
       else {
         followMode = false;
         if (!playTarget || Date.now() > retargetAt) {
@@ -121,12 +125,15 @@
         t = playTarget;
       }
       var ax = allowedX(t.x);
-      if (ax === null) return { x: posX, y: posY }; // margins too small: stay put
-      t.x = ax;
+      t.x = ax === null ? posX : ax;
       return t;
     }
 
-    function resetIdle() { idleAnimation = null; idleAnimationFrame = 0; }
+    function resetIdle() {
+      idleAnimation = null;
+      idleAnimationFrame = 0;
+      el.style.transform = '';
+    }
 
     function setSprite(name, frame) {
       var s = spriteSets[name][frame % spriteSets[name].length];
@@ -135,19 +142,57 @@
 
     function idle() {
       idleTime += 1;
-      if (idleTime > 10 && Math.floor(Math.random() * 200) === 0 && idleAnimation === null) {
-        var avail = ['sleeping', 'scratchSelf'];
-        if (posX < 32) avail.push('scratchWallW');
-        if (posY < 32) avail.push('scratchWallN');
-        if (posX > window.innerWidth - 32) avail.push('scratchWallE');
-        if (posY > window.innerHeight - 32) avail.push('scratchWallS');
-        idleAnimation = avail[Math.floor(Math.random() * avail.length)];
+      var now = Date.now();
+
+      // sniff-greet when the two cats are close
+      if (idleAnimation === null && buddy && Math.random() < 0.06) {
+        var b = buddy();
+        if (Math.hypot(posX - b.x, posY - b.y) < 150) idleAnimation = 'sniff';
       }
+
+      // occasional zoomies: bolt across the screen
+      if (idleTime > 10 && now > dashUntil + 3000 && Math.random() < 0.03) {
+        dashUntil = now + 1300 + Math.random() * 900;
+        var W = window.innerWidth;
+        playTarget = { x: allowedX(Math.random() * W), y: clamp(80 + Math.random() * (window.innerHeight - 160), HALF, window.innerHeight - HALF) };
+        retargetAt = now + 2500;
+        idleAnimation = null;
+        idleAnimationFrame = 0;
+        return;
+      }
+
+      // random idle action every ~16s
+      if (idleTime > 10 && Math.floor(Math.random() * 160) === 0 && idleAnimation === null) {
+        var avail = ['sleeping', 'scratchSelf', 'tailchase', 'stretch'];
+        if (posX < HALF + 16) avail.push('scratchWallW');
+        if (posY < HALF + 16) avail.push('scratchWallN');
+        if (posX > window.innerWidth - HALF - 16) avail.push('scratchWallE');
+        if (posY > window.innerHeight - HALF - 16) avail.push('scratchWallS');
+        idleAnimation = avail[Math.floor(Math.random() * avail.length)];
+        idleAnimationFrame = 0;
+      }
+
       switch (idleAnimation) {
         case 'sleeping':
           if (idleAnimationFrame < 8) { setSprite('tired', 0); break; }
           setSprite('sleeping', Math.floor(idleAnimationFrame / 4));
           if (idleAnimationFrame > 192) resetIdle();
+          break;
+        case 'tailchase':
+          setSprite(SPIN[Math.floor(idleAnimationFrame / 2) % 8], 0);
+          el.style.transform = 'scale(' + SCALE + ') rotate(' + (Math.sin(idleAnimationFrame * 0.5) * 20) + 'deg)';
+          if (idleAnimationFrame > 30) resetIdle();
+          break;
+        case 'stretch':
+          {
+            var k = Math.sin((idleAnimationFrame / 10) * Math.PI);
+            el.style.transform = 'scaleX(' + SCALE + ') scaleY(' + (SCALE * (1 + 0.28 * k)) + ')';
+            if (idleAnimationFrame > 10) resetIdle();
+          }
+          break;
+        case 'sniff':
+          setSprite(Math.random() < 0.5 ? 'idle' : 'alert', 0);
+          if (idleAnimationFrame > 12) resetIdle();
           break;
         case 'scratchWallN':
         case 'scratchWallS':
@@ -158,7 +203,8 @@
           if (idleAnimationFrame > 9) resetIdle();
           break;
         default:
-          setSprite('idle', 0);
+          if (Math.hypot(posX - mouseX, posY - mouseY) < 260 && Math.random() < 0.4) setSprite('alert', 0);
+          else setSprite('idle', 0);
           return;
       }
       idleAnimationFrame += 1;
@@ -166,11 +212,14 @@
 
     function frame() {
       frameCount += 1;
+      var now = Date.now();
+      var dashing = now < dashUntil;
       var t = getTarget();
       var dx = posX - t.x, dy = posY - t.y;
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < SPEED || dist < stopDist) { idle(); return; }
+      if (!dashing && (dist < SPEED || dist < stopDist)) { idle(); return; }
+      var speed = dashing ? SPEED * 3 : SPEED;
 
       var reg = regions();
       var mid = window.innerWidth / 2;
@@ -182,11 +231,12 @@
         hi = leftSide ? reg.l2 : reg.r2;
       } else {
         lo = HALF;
-        hi = window.innerWidth - HALF; // no margins: full screen
+        hi = window.innerWidth - HALF;
       }
 
       idleAnimation = null;
       idleAnimationFrame = 0;
+      el.style.transform = '';
 
       if (idleTime > 1) {
         setSprite('alert', 0);
@@ -202,8 +252,8 @@
       direction += dx / dist < -0.5 ? 'E' : '';
       setSprite(direction, frameCount);
 
-      posX -= (dx / dist) * SPEED;
-      posY -= (dy / dist) * SPEED;
+      posX -= (dx / dist) * speed;
+      posY -= (dy / dist) * speed;
 
       posX = clamp(posX, lo, hi);
       posY = clamp(posY, HALF, window.innerHeight - HALF);
@@ -230,6 +280,7 @@
     requestAnimationFrame(loop);
 
     return {
+      setBuddy: setBuddy,
       getX: function () { return posX; },
       getY: function () { return posY; }
     };
@@ -237,14 +288,14 @@
 
   var t0 = Date.now();
   var cat1 = new Neko('ccat-left', 90, window.innerHeight - 100, 'assets/img/oneko-orange-v3.png', 48, leaderPlay, t0 + 3000);
-  /* follower: always aim near the leader, retarget often for smooth trailing */
-  new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100, function (px, py) {
+  var cat2 = new Neko('ccat-right', window.innerWidth - 90, window.innerHeight - 100, 'assets/img/oneko-pink-v2.png', 100, function (px, py) {
     var b = { x: cat1.getX(), y: cat1.getY() };
     return {
-      x: clamp(b.x + (Math.random() * 60 - 30), 16, window.innerWidth - 16),
-      y: clamp(b.y + (Math.random() * 60 - 30), 16, window.innerHeight - 16),
+      x: clamp(b.x + (Math.random() * 60 - 30), HALF, window.innerWidth - HALF),
+      y: clamp(b.y + (Math.random() * 60 - 30), HALF, window.innerHeight - HALF),
       cooldown: 500 + Math.random() * 800
     };
   }, t0 + 4000);
+  cat1.setBuddy(function () { return { x: cat2.getX(), y: cat2.getY() }; });
+  cat2.setBuddy(function () { return { x: cat1.getX(), y: cat1.getY() }; });
 })();
-
