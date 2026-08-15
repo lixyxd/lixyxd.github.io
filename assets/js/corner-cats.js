@@ -52,6 +52,20 @@
 
   function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
 
+  /* cats may only roam the blank margins beside the centered content column */
+  function margins() {
+    var W = window.innerWidth;
+    var m = Math.max((W - 1080) / 2, 0);
+    return { W: W, m: m };
+  }
+  function allowedX(x) {
+    var g = margins();
+    var l2 = g.m - 54, r1 = g.W - g.m + 54; // leave 54px so the 96px cat clears the content
+    if (l2 < 46 || r1 > g.W - 46) return null; // margins too small to hold a cat
+    if (x <= (l2 + r1) / 2) return clamp(x, 16, l2);
+    return clamp(x, r1, g.W - 16);
+  }
+
   /* leader: walk to a nearby spot, then rest for a while */
   function leaderPlay(px, py) {
     return {
@@ -76,15 +90,22 @@
     var playTarget = null, retargetAt = 0;
 
     function getTarget() {
-      if (followMode && Date.now() < followUntil) return { x: mouseX, y: mouseY };
-      followMode = false;
-      if (Date.now() < startAt) return { x: startX, y: startY }; // stay at own corner first
-      if (!playTarget || Date.now() > retargetAt) {
-        var t = playFn(posX, posY);
-        playTarget = { x: t.x, y: t.y };
-        retargetAt = Date.now() + t.cooldown;
+      var t;
+      if (followMode && Date.now() < followUntil) t = { x: mouseX, y: mouseY };
+      else if (Date.now() < startAt) t = { x: startX, y: startY }; // stay at own corner first
+      else {
+        followMode = false;
+        if (!playTarget || Date.now() > retargetAt) {
+          var pt = playFn(posX, posY);
+          playTarget = { x: pt.x, y: pt.y };
+          retargetAt = Date.now() + pt.cooldown;
+        }
+        t = playTarget;
       }
-      return playTarget;
+      var ax = allowedX(t.x);
+      if (ax === null) return { x: posX, y: posY }; // margins too small: stay put
+      t.x = ax;
+      return t;
     }
 
     function resetIdle() { idleAnimation = null; idleAnimationFrame = 0; }
@@ -152,7 +173,10 @@
 
       posX -= (dx / dist) * SPEED;
       posY -= (dy / dist) * SPEED;
-      posX = clamp(posX, 16, window.innerWidth - 16);
+      var ax = allowedX(posX);
+      if (ax === null) { el.style.display = 'none'; return; } // no margin room: hide cat
+      if (el.style.display === 'none') el.style.display = '';
+      posX = ax;
       posY = clamp(posY, 16, window.innerHeight - 16);
       el.style.left = (posX - 16) + 'px';
       el.style.top = (posY - 16) + 'px';
