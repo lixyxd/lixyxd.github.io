@@ -154,6 +154,17 @@
 
       if (dist < SPEED || dist < stopDist) { idle(); return; }
 
+      // crossing the content column: teleport straight across so the cats can reunite
+      var mid = window.innerWidth / 2;
+      if ((posX < mid) !== (t.x < mid)) {
+        posX = t.x;
+        posY = clamp(t.y, 16, window.innerHeight - 16);
+        el.style.left = (posX - 16) + 'px';
+        el.style.top = (posY - 16) + 'px';
+        idle();
+        return;
+      }
+
       idleAnimation = null;
       idleAnimationFrame = 0;
 
