@@ -502,6 +502,9 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .avatar-status{right:-4px; bottom:-4px;}
   .hero-stats{gap:26px;}
   .to-top,.to-bottom{right:16px;}
+  .cat{width:46px; height:46px; bottom:8px;}
+  .cat-left{left:8px;}
+  .cat-right{right:8px;}
   .footer-inner{flex-direction:column; text-align:center; justify-content:center;}
   .fb-addr{justify-content:center; text-align:left;}
   /* mobile perf: drop expensive blur/grid/star animations */
@@ -511,6 +514,15 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .bg-grid{animation:none;}
   .globe-day{display:none;}
 }
+
+/* corner cats */
+.cat{position:fixed; bottom:14px; z-index:30; pointer-events:none; filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));}
+.cat-left{left:14px;}
+.cat-right{right:14px; transform:scaleX(-1);}
+.cat .cat-tail{transform-box:view-box; transform-origin:88px 60px; animation:cat-tail 2.8s ease-in-out infinite;}
+@keyframes cat-tail{0%,100%{transform:rotate(-14deg);} 50%{transform:rotate(18deg);}}
+.cat .cat-eyes{transform-box:fill-box; transform-origin:center; animation:cat-blink 5s infinite;}
+@keyframes cat-blink{0%,90%,100%{transform:scaleY(1);} 94%{transform:scaleY(.12);} 97%{transform:scaleY(1);}}
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce){
