@@ -201,28 +201,21 @@
   setInterval(tickClock, 1000);
   if (navWeather) {
     (function () {
-      var iconFor = function (code) {
-        if (code === 0) return '☀️';
-        if (code <= 3) return '🌤️';
-        if (code <= 48) return '🌫️';
-        if (code <= 67) return '🌦️';
-        if (code <= 77) return '🌨️';
-        if (code <= 82) return '🌧️';
-        return '⛈️';
+      var done = false;
+      var setText = function (s) {
+        if (!done) { done = true; navWeather.textContent = s; }
       };
-      fetch('https://ipapi.co/json/')
-        .then(function (r) { return r.json(); })
-        .then(function (ip) {
-          var lat = ip.latitude, lon = ip.longitude, city = ip.city || '';
-          return fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,weather_code')
-            .then(function (r) { return r.json(); })
-            .then(function (w) {
-              var cur = w.current || {};
-              var temp = Math.round(cur.temperature_2m || 0);
-              navWeather.textContent = iconFor(cur.weather_code || 0) + ' ' + temp + '°C' + (city ? ' ' + city : '');
-            });
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); setText('☁️ --°C'); }, 8000);
+      // wttr.in: single request, geolocates by visitor IP, CORS enabled
+      fetch('https://wttr.in/?format=' + encodeURIComponent('%c+%t'), ctrl ? { signal: ctrl.signal } : undefined)
+        .then(function (r) { return r.text(); })
+        .then(function (txt) {
+          clearTimeout(timer);
+          var s = (txt || '').trim();
+          setText(s ? s.replace(/\s+/g, ' ') : '☁️ --°C');
         })
-        .catch(function () { navWeather.textContent = '☁️ --°C'; });
+        .catch(function () { clearTimeout(timer); setText('☁️ --°C'); });
     })();
   }
 
