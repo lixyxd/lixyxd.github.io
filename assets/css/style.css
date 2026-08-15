@@ -190,8 +190,10 @@ em{font-style:normal;}
 .clock-card .cc-row{display:flex; align-items:baseline; justify-content:center; gap:8px;}
 .clock-card .cc-time{font-size:22px; font-weight:700; color:var(--sky); font-variant-numeric:tabular-nums; letter-spacing:1px;}
 .clock-card .cc-weather{font-size:11px; color:var(--dim);}
-.clock-card .cc-date{display:block; margin-top:4px; font-size:11.5px; color:var(--faint);}
-.clock-card .cc-lunar{display:block; font-size:10.5px; color:var(--dim);}
+.clock-card .cc-date{display:block; margin-top:4px; font-size:12.5px; color:var(--dim); letter-spacing:.4px;
+  font-family:"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;}
+.clock-card .cc-lunar{display:block; font-size:11.5px; color:var(--amber); letter-spacing:.5px;
+  font-family:"Kaiti SC","KaiTi","STKaiti","SimSun","Songti SC",serif;}
 .links{display:flex; gap:6px;}
 .links a{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:104px; padding:5px 14px 6px; border-radius:10px; gap:2px;
