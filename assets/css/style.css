@@ -237,7 +237,7 @@ em{font-style:normal;}
   box-shadow:var(--shadow-1);}
 .avatar-status i{width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 0 rgba(52,211,153,.6); animation:pulse-dot 2.2s infinite;}
 @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55);} 70%{box-shadow:0 0 0 8px rgba(52,211,153,0);} 100%{box-shadow:0 0 0 0 rgba(52,211,153,0);}}
-.hero-text{flex:1 1 460px; min-width:300px; max-width:560px; display:flex; flex-direction:column; justify-content:center;}
+.hero-text{flex:1 1 460px; min-width:300px; max-width:640px; display:flex; flex-direction:column; justify-content:center;}
 .hero-units{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;}
 .unit-chip{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--amber);
   border:1px solid rgba(251,191,36,.55); background:rgba(251,191,36,.12); border-radius:999px; padding:6px 14px;
@@ -249,7 +249,7 @@ em{font-style:normal;}
 .unit-chip.per:hover{color:var(--sky); border-color:rgba(56,189,248,.7); background:rgba(56,189,248,.16);
   box-shadow:0 0 14px rgba(56,189,248,.25);}
 .hero-focus{display:flex; flex-direction:column; align-items:flex-start; gap:8px; margin-top:12px;}
-.focus-label{font-size:11.5px; font-weight:700; color:var(--amber); letter-spacing:1.5px;}
+.focus-label{font-size:13px; font-weight:700; color:var(--amber); letter-spacing:1px;}
 .focus-chips{display:flex; gap:8px; flex-wrap:wrap;}
 .focus-chip{font-size:13px; font-weight:600; color:var(--sky); border:1px solid rgba(56,189,248,.4);
   background:rgba(56,189,248,.1); border-radius:999px; padding:4px 13px; transition:.18s;}
