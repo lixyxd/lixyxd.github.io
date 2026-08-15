@@ -11,6 +11,7 @@
 
   var SPEED = 30;
   var FOLLOW_MS = 6000;
+  var HALF = window.innerWidth <= 760 ? 32 : 48; // visual half-width of a cat
   var mouseX = 0, mouseY = 0;
   var followMode = false, followUntil = 0;
 
@@ -60,16 +61,16 @@
   }
   function allowedX(x) {
     var g = margins();
-    var l2 = g.m - 54, r1 = g.W - g.m + 54; // leave 54px so the 96px cat clears the content
-    if (l2 < 46 || r1 > g.W - 46) return null; // margins too small to hold a cat
-    if (x <= (l2 + r1) / 2) return clamp(x, 16, l2);
-    return clamp(x, r1, g.W - 16);
+    var l2 = g.m - 54, r1 = g.W - g.m + 54; // leave 54px so the cat clears the content
+    if (l2 < HALF || r1 > g.W - HALF) return clamp(x, HALF, g.W - HALF); // no margins: full screen
+    if (x <= (l2 + r1) / 2) return clamp(x, HALF, l2);
+    return clamp(x, r1, g.W - HALF);
   }
   function regions() {
     var g = margins();
-    var l1 = 16, l2 = g.m - 54;
-    var r1 = g.W - g.m + 54, r2 = g.W - 16;
-    if (l2 < 46 || r1 > g.W - 46) return null;
+    var l1 = HALF, l2 = g.m - 54;
+    var r1 = g.W - g.m + 54, r2 = g.W - HALF;
+    if (l2 < HALF || r1 > g.W - HALF) return null; // margins too small -> full screen
     return { l1: l1, l2: l2, r1: r1, r2: r2 };
   }
 
@@ -172,8 +173,17 @@
       if (dist < SPEED || dist < stopDist) { idle(); return; }
 
       var reg = regions();
-      if (!reg) { el.style.display = 'none'; return; } // no margin room: hide cat
-      if (el.style.display === 'none') el.style.display = '';
+      var mid = window.innerWidth / 2;
+      var leftSide = posX < mid;
+      var tgtLeft = t.x < mid;
+      var lo, hi;
+      if (reg) {
+        lo = leftSide ? reg.l1 : reg.r1;
+        hi = leftSide ? reg.l2 : reg.r2;
+      } else {
+        lo = HALF;
+        hi = window.innerWidth - HALF; // no margins: full screen
+      }
 
       idleAnimation = null;
       idleAnimationFrame = 0;
@@ -195,17 +205,11 @@
       posX -= (dx / dist) * SPEED;
       posY -= (dy / dist) * SPEED;
 
-      // clamp to the current margin strip
-      var mid = window.innerWidth / 2;
-      var leftSide = posX < mid;
-      var tgtLeft = t.x < mid;
-      var lo = leftSide ? reg.l1 : reg.r1;
-      var hi = leftSide ? reg.l2 : reg.r2;
       posX = clamp(posX, lo, hi);
-      posY = clamp(posY, 16, window.innerHeight - 16);
+      posY = clamp(posY, HALF, window.innerHeight - HALF);
 
-      // crossing the content area: run to the strip edge, then teleport across to the other strip edge
-      if (tgtLeft !== leftSide) {
+      // crossing the content area (only when margins exist): run to the strip edge, then teleport across
+      if (reg && tgtLeft !== leftSide) {
         if (leftSide && posX >= reg.l2) posX = reg.r1;
         else if (!leftSide && posX <= reg.r1) posX = reg.l2;
       }
