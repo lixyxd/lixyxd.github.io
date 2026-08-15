@@ -502,6 +502,7 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .avatar-status{right:-4px; bottom:-4px;}
   .hero-stats{gap:26px;}
   .to-top,.to-bottom{right:16px;}
+  .ccat{transform:scale(1.5);}
   .footer-inner{flex-direction:column; text-align:center; justify-content:center;}
   .fb-addr{justify-content:center; text-align:left;}
   /* mobile perf: drop expensive blur/grid/star animations */
@@ -512,9 +513,9 @@ body.tabs-enabled .sec.reveal{opacity:1; transform:none;}
   .globe-day{display:none;}
 }
 
-/* corner cats (pixel art, patrol corners via corner-cats.js) */
+/* corner cats (pixel art, cursor-following via corner-cats.js) */
 .ccat{position:fixed; z-index:30; pointer-events:none; image-rendering:pixelated;
-  filter:drop-shadow(0 6px 12px rgba(0,0,0,.45));}
+  transform:scale(2); filter:drop-shadow(0 6px 12px rgba(0,0,0,.45));}
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce){

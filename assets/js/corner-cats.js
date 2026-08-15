@@ -1,12 +1,18 @@
-/* corner-cats.js — two pixel cats patrolling the bottom-left / bottom-right corners.
-   Sprite sheet: assets/img/oneko.gif (from adryd325/oneko.js, MIT).
-   Each cat wanders its corner, sits, scratches, and occasionally falls asleep. */
+/* corner-cats.js — oneko-style pixel cats with mouse interaction.
+   Cat-left chases the cursor; cat-right chases cat-left.
+   Sprite sheet: assets/img/oneko.gif (from adryd325/oneko.js, MIT). */
 (function () {
   'use strict';
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var SPRITE = 'assets/img/oneko.gif';
-  var SPEED = 9;
+  var SPEED = 10;
+  var mouseX = 0, mouseY = 0;
+
+  document.addEventListener('mousemove', function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
   var spriteSets = {
     idle: [[-3, -3]],
@@ -28,7 +34,7 @@
     NW: [[-1, 0], [-1, -1]]
   };
 
-  function Neko(id, corner) {
+  function Neko(id, startX, startY, getTarget) {
     var el = document.createElement('div');
     el.id = id;
     el.className = 'ccat';
@@ -38,22 +44,8 @@
     el.style.backgroundImage = 'url(' + SPRITE + ')';
     document.body.appendChild(el);
 
-    var posX, posY, targetX, targetY;
-    var frameCount = 0, idleTime = 0, idleAnimation = null, idleAnimationFrame = 0;
-    var pauseUntil = 0, lastTs = null;
-
-    function cornerBox() {
-      var W = window.innerWidth, H = window.innerHeight;
-      var bx = Math.max(40, W * 0.16), by = Math.max(40, H * 0.45);
-      if (corner === 'left') return { x1: 8, x2: bx, y1: by, y2: H - 8 };
-      return { x1: W - bx, x2: W - 8, y1: by, y2: H - 8 };
-    }
-
-    function randTarget() {
-      var b = cornerBox();
-      targetX = b.x1 + Math.random() * (b.x2 - b.x1);
-      targetY = b.y1 + Math.random() * (b.y2 - b.y1);
-    }
+    var posX = startX, posY = startY;
+    var frameCount = 0, idleTime = 0, idleAnimation = null, idleAnimationFrame = 0, lastTs = null;
 
     function resetIdle() { idleAnimation = null; idleAnimationFrame = 0; }
 
@@ -95,18 +87,11 @@
 
     function frame() {
       frameCount += 1;
-      var now = Date.now();
-      var dx = posX - targetX, dy = posY - targetY;
+      var t = getTarget();
+      var dx = posX - t.x, dy = posY - t.y;
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (now < pauseUntil) { idle(); return; }
-
-      if (dist < SPEED + 4) {
-        pauseUntil = now + 1500 + Math.random() * 6000;
-        randTarget();
-        idle();
-        return;
-      }
+      if (dist < SPEED || dist < 48) { idle(); return; }
 
       idleAnimation = null;
       idleAnimationFrame = 0;
@@ -127,8 +112,8 @@
 
       posX -= (dx / dist) * SPEED;
       posY -= (dy / dist) * SPEED;
-      posX = Math.min(Math.max(8, posX), window.innerWidth - 8);
-      posY = Math.min(Math.max(8, posY), window.innerHeight - 8);
+      posX = Math.min(Math.max(16, posX), window.innerWidth - 16);
+      posY = Math.min(Math.max(16, posY), window.innerHeight - 16);
       el.style.left = (posX - 16) + 'px';
       el.style.top = (posY - 16) + 'px';
     }
@@ -140,15 +125,20 @@
       requestAnimationFrame(loop);
     }
 
-    var b = cornerBox();
-    posX = b.x1 + 16;
-    posY = b.y2 - 16;
     el.style.left = (posX - 16) + 'px';
     el.style.top = (posY - 16) + 'px';
-    randTarget();
     requestAnimationFrame(loop);
+
+    return {
+      getX: function () { return posX; },
+      getY: function () { return posY; }
+    };
   }
 
-  new Neko('ccat-left', 'left');
-  new Neko('ccat-right', 'right');
+  var cat1 = new Neko('ccat-left', 60, window.innerHeight - 40, function () {
+    return { x: mouseX, y: mouseY };
+  });
+  new Neko('ccat-right', window.innerWidth - 60, window.innerHeight - 40, function () {
+    return { x: cat1.getX(), y: cat1.getY() };
+  });
 })();
