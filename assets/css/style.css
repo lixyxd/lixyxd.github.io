@@ -166,13 +166,6 @@ em{font-style:normal;}
 .bg-horizon{position:absolute; left:0; right:0; bottom:0; height:30vh; pointer-events:none;
   background:linear-gradient(180deg, rgba(26,44,82,0) 10%, rgba(26,44,82,.16) 55%, rgba(26,44,82,.42) 100%);}
 
-/* highlight card (annual review) */
-.honor-card.hl{border-color:rgba(251,191,36,.5); box-shadow:0 0 0 1px rgba(251,191,36,.15), 0 12px 34px rgba(2,6,18,.5);}
-.honor-card.hl::before{background:linear-gradient(90deg, transparent, rgba(251,191,36,.6), transparent);}
-.hl-chips{display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;}
-.hl-chips span{font-size:11px; color:var(--amber); border:1px solid rgba(251,191,36,.35);
-  background:rgba(251,191,36,.1); border-radius:999px; padding:1px 9px; font-weight:600;}
-
 /* ---------- scroll progress ---------- */
 .scroll-progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:100;
   background:linear-gradient(90deg,#38bdf8,#6366f1,#a78bfa,#fbbf24);
