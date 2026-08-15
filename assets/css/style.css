@@ -345,6 +345,8 @@ em{font-style:normal;}
   border-radius:999px; padding:0 5px; margin-left:4px;}
 .award{display:inline-block; font-size:11px; font-weight:700; color:var(--green); border:1px solid rgba(52,211,153,.4);
   background:rgba(52,211,153,.1); border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:2px;}
+.track{display:inline-block; font-size:11px; font-weight:700; color:var(--sky); border:1px solid rgba(56,189,248,.4);
+  background:rgba(56,189,248,.1); border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:2px;}
 
 /* publications */
 .pub-filters{display:flex; gap:8px; margin-left:auto;}
