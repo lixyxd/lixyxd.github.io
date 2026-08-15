@@ -124,6 +124,46 @@
     });
   }
 
+  /* ---- nav clock + weather (IP-based) ---- */
+  var navDate = document.getElementById('navDate');
+  var navTime = document.getElementById('navTime');
+  var navWeather = document.getElementById('navWeather');
+  var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+  var WEEK = ['日', '一', '二', '三', '四', '五', '六'];
+  var tickClock = function () {
+    var d = new Date();
+    if (navDate) navDate.textContent = (d.getMonth() + 1) + '月' + d.getDate() + '日 周' + WEEK[d.getDay()];
+    if (navTime) navTime.textContent = pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
+  };
+  tickClock();
+  setInterval(tickClock, 1000);
+  if (navWeather) {
+    (function () {
+      var iconFor = function (code) {
+        if (code === 0) return '☀️';
+        if (code <= 3) return '🌤️';
+        if (code <= 48) return '🌫️';
+        if (code <= 67) return '🌦️';
+        if (code <= 77) return '🌨️';
+        if (code <= 82) return '🌧️';
+        return '⛈️';
+      };
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (ip) {
+          var lat = ip.latitude, lon = ip.longitude, city = ip.city || '';
+          return fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,weather_code')
+            .then(function (r) { return r.json(); })
+            .then(function (w) {
+              var cur = w.current || {};
+              var temp = Math.round(cur.temperature_2m || 0);
+              navWeather.textContent = iconFor(cur.weather_code || 0) + ' ' + temp + '°C' + (city ? ' ' + city : '');
+            });
+        })
+        .catch(function () { navWeather.textContent = '☁️ --°C'; });
+    })();
+  }
+
   /* ---- hero stats count-up ---- */
   var counters = document.querySelectorAll('.stat b[data-count]');
   if (counters.length) {
