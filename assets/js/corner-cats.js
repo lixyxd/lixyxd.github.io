@@ -7,6 +7,8 @@
    (recolored from adryd325/oneko.js, MIT). */
 (function () {
   'use strict';
+  var ENABLED = false; // 猫动画暂时隐藏（代码保留）；想重新启用改成 true
+  if (!ENABLED) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var SPEED = 30;
